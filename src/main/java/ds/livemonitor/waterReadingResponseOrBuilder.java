@@ -17,16 +17,7 @@ public interface waterReadingResponseOrBuilder extends
    *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
    * </pre>
    *
-   * <code>string buildingID = 2;</code>
+   * <code>int32 buildingID = 2;</code>
    */
-  java.lang.String getBuildingID();
-  /**
-   * <pre>
-   *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-   * </pre>
-   *
-   * <code>string buildingID = 2;</code>
-   */
-  com.google.protobuf.ByteString
-      getBuildingIDBytes();
+  int getBuildingID();
 }

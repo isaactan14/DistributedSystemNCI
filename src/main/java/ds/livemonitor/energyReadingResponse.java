@@ -17,7 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private energyReadingResponse() {
     energyReading_ = 0;
-    buildingID_ = "";
+    buildingID_ = 0;
   }
 
   @java.lang.Override
@@ -49,10 +49,9 @@ private static final long serialVersionUID = 0L;
             energyReading_ = input.readInt32();
             break;
           }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 16: {
 
-            buildingID_ = s;
+            buildingID_ = input.readInt32();
             break;
           }
           default: {
@@ -97,45 +96,16 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int BUILDINGID_FIELD_NUMBER = 2;
-  private volatile java.lang.Object buildingID_;
+  private int buildingID_;
   /**
    * <pre>
    *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
    * </pre>
    *
-   * <code>string buildingID = 2;</code>
+   * <code>int32 buildingID = 2;</code>
    */
-  public java.lang.String getBuildingID() {
-    java.lang.Object ref = buildingID_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      buildingID_ = s;
-      return s;
-    }
-  }
-  /**
-   * <pre>
-   *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-   * </pre>
-   *
-   * <code>string buildingID = 2;</code>
-   */
-  public com.google.protobuf.ByteString
-      getBuildingIDBytes() {
-    java.lang.Object ref = buildingID_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      buildingID_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getBuildingID() {
+    return buildingID_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -155,8 +125,8 @@ private static final long serialVersionUID = 0L;
     if (energyReading_ != 0) {
       output.writeInt32(1, energyReading_);
     }
-    if (!getBuildingIDBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, buildingID_);
+    if (buildingID_ != 0) {
+      output.writeInt32(2, buildingID_);
     }
     unknownFields.writeTo(output);
   }
@@ -171,8 +141,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, energyReading_);
     }
-    if (!getBuildingIDBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, buildingID_);
+    if (buildingID_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, buildingID_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -192,8 +163,8 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && (getEnergyReading()
         == other.getEnergyReading());
-    result = result && getBuildingID()
-        .equals(other.getBuildingID());
+    result = result && (getBuildingID()
+        == other.getBuildingID());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -208,7 +179,7 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + ENERGYREADING_FIELD_NUMBER;
     hash = (53 * hash) + getEnergyReading();
     hash = (37 * hash) + BUILDINGID_FIELD_NUMBER;
-    hash = (53 * hash) + getBuildingID().hashCode();
+    hash = (53 * hash) + getBuildingID();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -344,7 +315,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       energyReading_ = 0;
 
-      buildingID_ = "";
+      buildingID_ = 0;
 
       return this;
     }
@@ -425,9 +396,8 @@ private static final long serialVersionUID = 0L;
       if (other.getEnergyReading() != 0) {
         setEnergyReading(other.getEnergyReading());
       }
-      if (!other.getBuildingID().isEmpty()) {
-        buildingID_ = other.buildingID_;
-        onChanged();
+      if (other.getBuildingID() != 0) {
+        setBuildingID(other.getBuildingID());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -484,59 +454,26 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object buildingID_ = "";
+    private int buildingID_ ;
     /**
      * <pre>
      *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
      * </pre>
      *
-     * <code>string buildingID = 2;</code>
+     * <code>int32 buildingID = 2;</code>
      */
-    public java.lang.String getBuildingID() {
-      java.lang.Object ref = buildingID_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        buildingID_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public int getBuildingID() {
+      return buildingID_;
     }
     /**
      * <pre>
      *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
      * </pre>
      *
-     * <code>string buildingID = 2;</code>
+     * <code>int32 buildingID = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getBuildingIDBytes() {
-      java.lang.Object ref = buildingID_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        buildingID_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-     * </pre>
-     *
-     * <code>string buildingID = 2;</code>
-     */
-    public Builder setBuildingID(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setBuildingID(int value) {
+      
       buildingID_ = value;
       onChanged();
       return this;
@@ -546,29 +483,11 @@ private static final long serialVersionUID = 0L;
      *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
      * </pre>
      *
-     * <code>string buildingID = 2;</code>
+     * <code>int32 buildingID = 2;</code>
      */
     public Builder clearBuildingID() {
       
-      buildingID_ = getDefaultInstance().getBuildingID();
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-     * </pre>
-     *
-     * <code>string buildingID = 2;</code>
-     */
-    public Builder setBuildingIDBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      buildingID_ = value;
+      buildingID_ = 0;
       onChanged();
       return this;
     }

@@ -44,13 +44,13 @@ public final class livemonitorImpl {
   static {
     java.lang.String[] descriptorData = {
       "\n\021livemonitor.proto\022\013livemonitor\"\'\n\021buil" +
-      "dingIDRequest\022\022\n\nbuildingID\030\001 \001(\t\"B\n\025ene" +
+      "dingIDRequest\022\022\n\nbuildingID\030\001 \001(\005\"B\n\025ene" +
       "rgyReadingResponse\022\025\n\renergyReading\030\001 \001(" +
-      "\005\022\022\n\nbuildingID\030\002 \001(\t\"@\n\024waterReadingRes" +
+      "\005\022\022\n\nbuildingID\030\002 \001(\005\"@\n\024waterReadingRes" +
       "ponse\022\024\n\014waterReading\030\001 \001(\005\022\022\n\nbuildingI" +
-      "D\030\002 \001(\t\"L\n\032temperatureReadingResponse\022\032\n" +
+      "D\030\002 \001(\005\"L\n\032temperatureReadingResponse\022\032\n" +
       "\022temperatureReading\030\001 \001(\005\022\022\n\nbuildingID\030" +
-      "\002 \001(\t2\245\002\n\renergyReading\022X\n\020getEnergyRead" +
+      "\002 \001(\0052\245\002\n\renergyReading\022X\n\020getEnergyRead" +
       "ing\022\036.livemonitor.buildingIDRequest\032\".li" +
       "vemonitor.energyReadingResponse0\001\022V\n\017get" +
       "WaterReading\022\036.livemonitor.buildingIDReq" +
