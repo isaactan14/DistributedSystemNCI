@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+//import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "ds.livemonitor";
+option java_outer_classname = "livemonitorImpl";
+
+package livemonitor;
+
+// Interface exported by the server.
+//server streaming RPC for all methods
+service energyReading {
+	rpc getEnergyReading(buildingIDRequest) returns (stream energyReadingResponse);
+	rpc getWaterReading(buildingIDRequest) returns (stream waterReadingResponse);
+	rpc getTemperatureReading(buildingIDRequest) returns (stream temperatureReadingResponse);
+}
+
+// define each variable in rpc method separately
+//3 methods in a service
+
+message buildingIDRequest {
+  int32 buildingID = 1;
+}
+
+message energyReadingResponse {
+  int32 energyReading = 1;
+  int32 buildingID = 2;
+  //google.protobuf.Timestamp timestamp = 3;//to add a timestamp
+}
+
+message waterReadingResponse {
+  int32 waterReading = 1;
+  int32 buildingID = 2;
+  //google.protobuf.Timestamp timestamp = 3;//to add a timestamp
+}
+
+message temperatureReadingResponse {
+  int32 temperatureReading = 1;
+  int32 buildingID = 2;
+  //google.protobuf.Timestamp timestamp = 3;//to add a timestamp
+}

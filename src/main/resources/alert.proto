@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+//import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "ds.alert";
+option java_outer_classname = "alertImpl";
+
+package alert;
+
+// Interface exported by the server.
+//1 unary RPC, 1 server streaming RPC and 1 client streaming RPC
+service alertService {
+	rpc setThreshold(thresholdRequest) returns (thresholdResponse) {};
+	rpc monitoringThreshold(buildingIDRequest) returns (stream monitoringResponse);
+	rpc sendAlert(stream sendAlertRequest) returns (sendAlertResponse);
+}
+
+// define each variable in rpc method separately
+//3 methods in a service
+
+message thresholdRequest {
+  int32 buildingID = 1;
+  int32 temperatureLimit = 2;
+  int32 energyLimit = 3;
+}
+
+message buildingIDRequest {
+  int32 buildingID = 1;
+}
+
+message sendAlertRequest {
+  int32 buildingID = 1;
+  int32 temperatureReading = 2;
+  int32 energyReading = 3;
+}
+
+message thresholdResponse {
+  string setStatusMessage = 1;
+  //google.protobuf.Timestamp date = 2;
+}
+
+message monitoringResponse {
+  string exceedMessage = 1;
+}
+
+message sendAlertResponse {
+  string alertMessage = 1;
+  int32 buildingID = 2;
+  //google.protobuf.Timestamp date = 3;
+}
