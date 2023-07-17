@@ -59,17 +59,18 @@ public final class alertImpl {
       "DRequest\022\022\n\nbuildingID\030\001 \001(\005\"Y\n\020sendAler" +
       "tRequest\022\022\n\nbuildingID\030\001 \001(\005\022\032\n\022temperat" +
       "ureReading\030\002 \001(\005\022\025\n\renergyReading\030\003 \001(\005\"" +
-      "-\n\021thresholdResponse\022\030\n\020setStatusMessage" +
-      "\030\001 \001(\t\"+\n\022monitoringResponse\022\025\n\rexceedMe" +
-      "ssage\030\001 \001(\t\"=\n\021sendAlertResponse\022\024\n\014aler" +
-      "tMessage\030\001 \001(\t\022\022\n\nbuildingID\030\002 \001(\0052\343\001\n\014a" +
-      "lertService\022C\n\014setThreshold\022\027.alert.thre" +
-      "sholdRequest\032\030.alert.thresholdResponse\"\000" +
-      "\022L\n\023monitoringThreshold\022\030.alert.building" +
-      "IDRequest\032\031.alert.monitoringResponse0\001\022@" +
-      "\n\tsendAlert\022\027.alert.sendAlertRequest\032\030.a" +
-      "lert.sendAlertResponse(\001B\027\n\010ds.alertB\tal" +
-      "ertImplP\001b\006proto3"
+      ";\n\021thresholdResponse\022\030\n\020setStatusMessage" +
+      "\030\001 \001(\t\022\014\n\004date\030\002 \001(\005\"+\n\022monitoringRespon" +
+      "se\022\025\n\rexceedMessage\030\001 \001(\t\"K\n\021sendAlertRe" +
+      "sponse\022\024\n\014alertMessage\030\001 \001(\t\022\022\n\nbuilding" +
+      "ID\030\002 \001(\005\022\014\n\004date\030\003 \001(\0052\343\001\n\014alertService\022" +
+      "C\n\014setThreshold\022\027.alert.thresholdRequest" +
+      "\032\030.alert.thresholdResponse\"\000\022L\n\023monitori" +
+      "ngThreshold\022\030.alert.buildingIDRequest\032\031." +
+      "alert.monitoringResponse0\001\022@\n\tsendAlert\022" +
+      "\027.alert.sendAlertRequest\032\030.alert.sendAle" +
+      "rtResponse(\001B\027\n\010ds.alertB\talertImplP\001b\006p" +
+      "roto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -106,7 +107,7 @@ public final class alertImpl {
     internal_static_alert_thresholdResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_alert_thresholdResponse_descriptor,
-        new java.lang.String[] { "SetStatusMessage", });
+        new java.lang.String[] { "SetStatusMessage", "Date", });
     internal_static_alert_monitoringResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_alert_monitoringResponse_fieldAccessorTable = new
@@ -118,7 +119,7 @@ public final class alertImpl {
     internal_static_alert_sendAlertResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_alert_sendAlertResponse_descriptor,
-        new java.lang.String[] { "AlertMessage", "BuildingID", });
+        new java.lang.String[] { "AlertMessage", "BuildingID", "Date", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

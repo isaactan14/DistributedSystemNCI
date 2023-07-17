@@ -44,21 +44,22 @@ public final class livemonitorImpl {
   static {
     java.lang.String[] descriptorData = {
       "\n\021livemonitor.proto\022\013livemonitor\"\'\n\021buil" +
-      "dingIDRequest\022\022\n\nbuildingID\030\001 \001(\005\"B\n\025ene" +
+      "dingIDRequest\022\022\n\nbuildingID\030\001 \001(\005\"P\n\025ene" +
       "rgyReadingResponse\022\025\n\renergyReading\030\001 \001(" +
-      "\005\022\022\n\nbuildingID\030\002 \001(\005\"@\n\024waterReadingRes" +
-      "ponse\022\024\n\014waterReading\030\001 \001(\005\022\022\n\nbuildingI" +
-      "D\030\002 \001(\005\"L\n\032temperatureReadingResponse\022\032\n" +
-      "\022temperatureReading\030\001 \001(\005\022\022\n\nbuildingID\030" +
-      "\002 \001(\0052\245\002\n\renergyReading\022X\n\020getEnergyRead" +
-      "ing\022\036.livemonitor.buildingIDRequest\032\".li" +
-      "vemonitor.energyReadingResponse0\001\022V\n\017get" +
-      "WaterReading\022\036.livemonitor.buildingIDReq" +
-      "uest\032!.livemonitor.waterReadingResponse0" +
-      "\001\022b\n\025getTemperatureReading\022\036.livemonitor" +
-      ".buildingIDRequest\032\'.livemonitor.tempera" +
-      "tureReadingResponse0\001B#\n\016ds.livemonitorB" +
-      "\017livemonitorImplP\001b\006proto3"
+      "\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030\003 \001(\005\"N\n\024w" +
+      "aterReadingResponse\022\024\n\014waterReading\030\001 \001(" +
+      "\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030\003 \001(\005\"Z\n\032t" +
+      "emperatureReadingResponse\022\032\n\022temperature" +
+      "Reading\030\001 \001(\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004dat" +
+      "e\030\003 \001(\0052\245\002\n\renergyReading\022X\n\020getEnergyRe" +
+      "ading\022\036.livemonitor.buildingIDRequest\032\"." +
+      "livemonitor.energyReadingResponse0\001\022V\n\017g" +
+      "etWaterReading\022\036.livemonitor.buildingIDR" +
+      "equest\032!.livemonitor.waterReadingRespons" +
+      "e0\001\022b\n\025getTemperatureReading\022\036.livemonit" +
+      "or.buildingIDRequest\032\'.livemonitor.tempe" +
+      "ratureReadingResponse0\001B#\n\016ds.livemonito" +
+      "rB\017livemonitorImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -83,19 +84,19 @@ public final class livemonitorImpl {
     internal_static_livemonitor_energyReadingResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_livemonitor_energyReadingResponse_descriptor,
-        new java.lang.String[] { "EnergyReading", "BuildingID", });
+        new java.lang.String[] { "EnergyReading", "BuildingID", "Date", });
     internal_static_livemonitor_waterReadingResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_livemonitor_waterReadingResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_livemonitor_waterReadingResponse_descriptor,
-        new java.lang.String[] { "WaterReading", "BuildingID", });
+        new java.lang.String[] { "WaterReading", "BuildingID", "Date", });
     internal_static_livemonitor_temperatureReadingResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_livemonitor_temperatureReadingResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_livemonitor_temperatureReadingResponse_descriptor,
-        new java.lang.String[] { "TemperatureReading", "BuildingID", });
+        new java.lang.String[] { "TemperatureReading", "BuildingID", "Date", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

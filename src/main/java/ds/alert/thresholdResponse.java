@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private thresholdResponse() {
     setStatusMessage_ = "";
+    date_ = 0;
   }
 
   @java.lang.Override
@@ -47,6 +48,11 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             setStatusMessage_ = s;
+            break;
+          }
+          case 16: {
+
+            date_ = input.readInt32();
             break;
           }
           default: {
@@ -84,10 +90,6 @@ private static final long serialVersionUID = 0L;
   public static final int SETSTATUSMESSAGE_FIELD_NUMBER = 1;
   private volatile java.lang.Object setStatusMessage_;
   /**
-   * <pre>
-   *google.protobuf.Timestamp date = 2;
-   * </pre>
-   *
    * <code>string setStatusMessage = 1;</code>
    */
   public java.lang.String getSetStatusMessage() {
@@ -103,10 +105,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   *google.protobuf.Timestamp date = 2;
-   * </pre>
-   *
    * <code>string setStatusMessage = 1;</code>
    */
   public com.google.protobuf.ByteString
@@ -121,6 +119,15 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int DATE_FIELD_NUMBER = 2;
+  private int date_;
+  /**
+   * <code>int32 date = 2;</code>
+   */
+  public int getDate() {
+    return date_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -140,6 +147,9 @@ private static final long serialVersionUID = 0L;
     if (!getSetStatusMessageBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, setStatusMessage_);
     }
+    if (date_ != 0) {
+      output.writeInt32(2, date_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -151,6 +161,10 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!getSetStatusMessageBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, setStatusMessage_);
+    }
+    if (date_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, date_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -170,6 +184,8 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && getSetStatusMessage()
         .equals(other.getSetStatusMessage());
+    result = result && (getDate()
+        == other.getDate());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -183,6 +199,8 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + SETSTATUSMESSAGE_FIELD_NUMBER;
     hash = (53 * hash) + getSetStatusMessage().hashCode();
+    hash = (37 * hash) + DATE_FIELD_NUMBER;
+    hash = (53 * hash) + getDate();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -318,6 +336,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       setStatusMessage_ = "";
 
+      date_ = 0;
+
       return this;
     }
 
@@ -345,6 +365,7 @@ private static final long serialVersionUID = 0L;
     public ds.alert.thresholdResponse buildPartial() {
       ds.alert.thresholdResponse result = new ds.alert.thresholdResponse(this);
       result.setStatusMessage_ = setStatusMessage_;
+      result.date_ = date_;
       onBuilt();
       return result;
     }
@@ -397,6 +418,9 @@ private static final long serialVersionUID = 0L;
         setStatusMessage_ = other.setStatusMessage_;
         onChanged();
       }
+      if (other.getDate() != 0) {
+        setDate(other.getDate());
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -428,10 +452,6 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object setStatusMessage_ = "";
     /**
-     * <pre>
-     *google.protobuf.Timestamp date = 2;
-     * </pre>
-     *
      * <code>string setStatusMessage = 1;</code>
      */
     public java.lang.String getSetStatusMessage() {
@@ -447,10 +467,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *google.protobuf.Timestamp date = 2;
-     * </pre>
-     *
      * <code>string setStatusMessage = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -467,10 +483,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *google.protobuf.Timestamp date = 2;
-     * </pre>
-     *
      * <code>string setStatusMessage = 1;</code>
      */
     public Builder setSetStatusMessage(
@@ -484,10 +496,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     *google.protobuf.Timestamp date = 2;
-     * </pre>
-     *
      * <code>string setStatusMessage = 1;</code>
      */
     public Builder clearSetStatusMessage() {
@@ -497,10 +505,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     *google.protobuf.Timestamp date = 2;
-     * </pre>
-     *
      * <code>string setStatusMessage = 1;</code>
      */
     public Builder setSetStatusMessageBytes(
@@ -511,6 +515,32 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       setStatusMessage_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int date_ ;
+    /**
+     * <code>int32 date = 2;</code>
+     */
+    public int getDate() {
+      return date_;
+    }
+    /**
+     * <code>int32 date = 2;</code>
+     */
+    public Builder setDate(int value) {
+      
+      date_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 date = 2;</code>
+     */
+    public Builder clearDate() {
+      
+      date_ = 0;
       onChanged();
       return this;
     }

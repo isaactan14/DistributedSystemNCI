@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   private energyReadingResponse() {
     energyReading_ = 0;
     buildingID_ = 0;
+    date_ = 0;
   }
 
   @java.lang.Override
@@ -52,6 +53,11 @@ private static final long serialVersionUID = 0L;
           case 16: {
 
             buildingID_ = input.readInt32();
+            break;
+          }
+          case 24: {
+
+            date_ = input.readInt32();
             break;
           }
           default: {
@@ -98,14 +104,19 @@ private static final long serialVersionUID = 0L;
   public static final int BUILDINGID_FIELD_NUMBER = 2;
   private int buildingID_;
   /**
-   * <pre>
-   *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-   * </pre>
-   *
    * <code>int32 buildingID = 2;</code>
    */
   public int getBuildingID() {
     return buildingID_;
+  }
+
+  public static final int DATE_FIELD_NUMBER = 3;
+  private int date_;
+  /**
+   * <code>int32 date = 3;</code>
+   */
+  public int getDate() {
+    return date_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -128,6 +139,9 @@ private static final long serialVersionUID = 0L;
     if (buildingID_ != 0) {
       output.writeInt32(2, buildingID_);
     }
+    if (date_ != 0) {
+      output.writeInt32(3, date_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -144,6 +158,10 @@ private static final long serialVersionUID = 0L;
     if (buildingID_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, buildingID_);
+    }
+    if (date_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, date_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -165,6 +183,8 @@ private static final long serialVersionUID = 0L;
         == other.getEnergyReading());
     result = result && (getBuildingID()
         == other.getBuildingID());
+    result = result && (getDate()
+        == other.getDate());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -180,6 +200,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getEnergyReading();
     hash = (37 * hash) + BUILDINGID_FIELD_NUMBER;
     hash = (53 * hash) + getBuildingID();
+    hash = (37 * hash) + DATE_FIELD_NUMBER;
+    hash = (53 * hash) + getDate();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -317,6 +339,8 @@ private static final long serialVersionUID = 0L;
 
       buildingID_ = 0;
 
+      date_ = 0;
+
       return this;
     }
 
@@ -345,6 +369,7 @@ private static final long serialVersionUID = 0L;
       ds.livemonitor.energyReadingResponse result = new ds.livemonitor.energyReadingResponse(this);
       result.energyReading_ = energyReading_;
       result.buildingID_ = buildingID_;
+      result.date_ = date_;
       onBuilt();
       return result;
     }
@@ -398,6 +423,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getBuildingID() != 0) {
         setBuildingID(other.getBuildingID());
+      }
+      if (other.getDate() != 0) {
+        setDate(other.getDate());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -456,20 +484,12 @@ private static final long serialVersionUID = 0L;
 
     private int buildingID_ ;
     /**
-     * <pre>
-     *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-     * </pre>
-     *
      * <code>int32 buildingID = 2;</code>
      */
     public int getBuildingID() {
       return buildingID_;
     }
     /**
-     * <pre>
-     *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-     * </pre>
-     *
      * <code>int32 buildingID = 2;</code>
      */
     public Builder setBuildingID(int value) {
@@ -479,15 +499,37 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-     * </pre>
-     *
      * <code>int32 buildingID = 2;</code>
      */
     public Builder clearBuildingID() {
       
       buildingID_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int date_ ;
+    /**
+     * <code>int32 date = 3;</code>
+     */
+    public int getDate() {
+      return date_;
+    }
+    /**
+     * <code>int32 date = 3;</code>
+     */
+    public Builder setDate(int value) {
+      
+      date_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 date = 3;</code>
+     */
+    public Builder clearDate() {
+      
+      date_ = 0;
       onChanged();
       return this;
     }

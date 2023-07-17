@@ -13,11 +13,12 @@ public interface waterReadingResponseOrBuilder extends
   int getWaterReading();
 
   /**
-   * <pre>
-   *google.protobuf.Timestamp timestamp = 3;//to add a timestamp
-   * </pre>
-   *
    * <code>int32 buildingID = 2;</code>
    */
   int getBuildingID();
+
+  /**
+   * <code>int32 date = 3;</code>
+   */
+  int getDate();
 }

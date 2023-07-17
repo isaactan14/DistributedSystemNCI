@@ -18,11 +18,12 @@ public interface sendAlertResponseOrBuilder extends
       getAlertMessageBytes();
 
   /**
-   * <pre>
-   *google.protobuf.Timestamp date = 3;
-   * </pre>
-   *
    * <code>int32 buildingID = 2;</code>
    */
   int getBuildingID();
+
+  /**
+   * <code>int32 date = 3;</code>
+   */
+  int getDate();
 }

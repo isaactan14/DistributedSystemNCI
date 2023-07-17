@@ -8,20 +8,17 @@ public interface thresholdResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <pre>
-   *google.protobuf.Timestamp date = 2;
-   * </pre>
-   *
    * <code>string setStatusMessage = 1;</code>
    */
   java.lang.String getSetStatusMessage();
   /**
-   * <pre>
-   *google.protobuf.Timestamp date = 2;
-   * </pre>
-   *
    * <code>string setStatusMessage = 1;</code>
    */
   com.google.protobuf.ByteString
       getSetStatusMessageBytes();
+
+  /**
+   * <code>int32 date = 2;</code>
+   */
+  int getDate();
 }

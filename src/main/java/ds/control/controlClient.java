@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import io.grpc.stub.StreamObserver;
 
 import ds.control.controlScheduleGrpc.controlScheduleStub;
 import ds.control.controlScheduleGrpc.controlScheduleBlockingStub;
@@ -42,20 +43,47 @@ public class controlClient {
 		channel.shutdown();
 	  }
 	
+	//@Override
 	public static void reverseStreamHeating() {
 		// First creating a request message. 
 		energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(energyDemandRequest.ENERGYDEMAND_FIELD_NUMBER).build();
 		
 		try {
 			// Calling a remote RPC method using blocking stub defined in main method. req is the message we want to pass.
-			Iterator<heatingResponse> responseIterator = blockingStub.getHeating(req);
+			StreamObserver<heatingResponse> responseObserver = new StreamObserver<heatingResponse>() {
+                @Override
+                public void onNext(heatingResponse response) {
+                    // response contains the output from the server side. Here, we are printing the value contained by response.
+                    System.out.println("Heating Action: " + response.getHeatingAction());
+                }
+                
+                @Override
+                public void onError(Throwable t) {
+                    // Print if any error/exception is generated.
+                    System.out.println(t.getMessage());
+                }
+
+                @Override
+                public void onCompleted() {
+                    // The RPC is completed.
+                }
+            };
+            
+         // Call the bidirectional streaming RPC method using the asyncStub.
+            StreamObserver<energyDemandRequest> requestObserver = asyncStub.getHeating(responseObserver);
+            requestObserver.onNext(req);
+            // Call onCompleted to signal the end of requests from the client.
+            requestObserver.onCompleted();
+           
+			/*
+			Iterator<heatingResponse> responseIterator = asyncStub.getHeating(req);
 			while (responseIterator.hasNext()) {
 				heatingResponse response = responseIterator.next();
 				//response contains the output from the server side. Here, we are printing the value contained by response.
 				System.out.println("Heating Action: " + response.getHeatingAction());
-			}
+			}*/
 			
-		}catch(StatusRuntimeException ex) {
+		} catch(StatusRuntimeException ex) {
 			// Print if any error/exception is generated.
 			System.out.println( ex.getMessage());
 			//ex.printStackTrace();
@@ -64,21 +92,47 @@ public class controlClient {
 	}
 	
 	public static void reverseStreamLighting() {
-		// First creating a request message. Here, the message contains emply message as defined in proto enum
+		// First creating a request message. 
 		energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(energyDemandRequest.ENERGYDEMAND_FIELD_NUMBER).build();
 		try {
 			// Calling a remote RPC method using blocking stub defined in main method. req is the message we want to pass.
-			Iterator<lightingResponse> responseIterator = blockingStub.getLighting(req);
+			StreamObserver<lightingResponse> responseObserver = new StreamObserver<lightingResponse>() {
+                @Override
+                public void onNext(lightingResponse response) {
+                    // response contains the output from the server side. Here, we are printing the value contained by response.
+                    System.out.println("Lighting Action: " + response.getLightingAction());
+                }
+
+                @Override
+                public void onError(Throwable t) {
+                    // Print if any error/exception is generated.
+                    System.out.println(t.getMessage());
+                }
+
+                @Override
+                public void onCompleted() {
+                    // The RPC is completed.
+                }
+            };
+            
+         // Call the bidirectional streaming RPC method using the asyncStub.
+            StreamObserver<energyDemandRequest> requestObserver = asyncStub.getLighting(responseObserver);
+            requestObserver.onNext(req);
+            // Call onCompleted to signal the end of requests from the client.
+            requestObserver.onCompleted();
+
+			
+			/*Iterator<lightingResponse> responseIterator = asyncStub.getLighting(req);
 			while (responseIterator.hasNext()) {
 				lightingResponse response = responseIterator.next();
 				//response contains the output from the server side. Here, we are printing the value contained by response.
 				System.out.println("Lighting Action: " + response.getLightingAction());
-			}
+			}*/
 			
 			
 		}catch(StatusRuntimeException ex) {
 			// Print if any error/exception is generated.
-			System.out.println( ex.getMessage());
+			System.out.println(ex.getMessage());
 			//ex.printStackTrace();
 		}
 

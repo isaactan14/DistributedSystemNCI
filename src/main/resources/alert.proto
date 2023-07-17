@@ -37,7 +37,7 @@ message sendAlertRequest {
 
 message thresholdResponse {
   string setStatusMessage = 1;
-  //google.protobuf.Timestamp date = 2;
+  int32 date=2;
 }
 
 message monitoringResponse {
@@ -47,5 +47,5 @@ message monitoringResponse {
 message sendAlertResponse {
   string alertMessage = 1;
   int32 buildingID = 2;
-  //google.protobuf.Timestamp date = 3;
+  int32 date=3;
 }

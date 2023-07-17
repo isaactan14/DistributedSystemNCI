@@ -26,17 +26,17 @@ message buildingIDRequest {
 message energyReadingResponse {
   int32 energyReading = 1;
   int32 buildingID = 2;
-  //google.protobuf.Timestamp timestamp = 3;//to add a timestamp
+  int32 date=3;
 }
 
 message waterReadingResponse {
   int32 waterReading = 1;
   int32 buildingID = 2;
-  //google.protobuf.Timestamp timestamp = 3;//to add a timestamp
+  int32 date=3;
 }
 
 message temperatureReadingResponse {
   int32 temperatureReading = 1;
   int32 buildingID = 2;
-  //google.protobuf.Timestamp timestamp = 3;//to add a timestamp
+  int32 date=3;
 }
