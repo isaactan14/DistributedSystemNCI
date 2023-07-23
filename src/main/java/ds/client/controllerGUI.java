@@ -1,4 +1,4 @@
-package ds.control;
+package ds.client;
 
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
@@ -7,14 +7,20 @@ import java.util.logging.Logger;
 import io.grpc.stub.StreamObserver;
 
 import ds.control.controlScheduleGrpc.controlScheduleStub;
+import ds.control.energyDemandRequest;
+import ds.control.heatingResponse;
+import ds.control.lightingResponse;
+import ds.control.scheduleResponse;
+import ds.control.buildingIDRequest;
+import ds.control.controlScheduleGrpc;
 import ds.control.controlScheduleGrpc.controlScheduleBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
-public class controlClient {
+public class controllerGUI {
 
-	private static final Logger logger = Logger.getLogger(controlClient.class.getName());
+	private static final Logger logger = Logger.getLogger(controllerGUI.class.getName());
 
 	// Creating stubs for establishing the connection with server.
 	// Blocking stub
@@ -35,7 +41,7 @@ public class controlClient {
 		blockingStub = controlScheduleGrpc.newBlockingStub(channel);
 		asyncStub = controlScheduleGrpc.newStub(channel);
 		
-		controlClient client = new controlClient();
+		controllerGUI client = new controllerGUI();
 		reverseStreamHeating();
 		reverseStreamLighting();
 		viewSchedule();

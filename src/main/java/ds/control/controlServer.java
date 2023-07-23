@@ -65,8 +65,9 @@ public class controlServer extends controlScheduleImplBase {
 //		NOTE - YOU MAY NEED TO MODIFY THIS LOGIC FOR YOUR PROJECTS BASED ON TYPE OF THE RPC METHODS 
 	// For override Refer - https://docs.oracle.com/javase/8/docs/api/java/lang/Override.html	 
 
-
-	public StreamObserver<energyDemandRequest> reverseStreamHeating(StreamObserver<heatingResponse> responseObserver) {
+		
+@Override
+	public StreamObserver<energyDemandRequest> getHeating(StreamObserver<heatingResponse> responseObserver) {
 		return new StreamObserver<energyDemandRequest>() {
 			// For each message in the stream, get one stream at a time.
 			// NOTE: YOU MAY MODIFY THE LOGIC OF onNext, onError, onCompleted BASED ON YOUR PROJECT.
@@ -103,9 +104,9 @@ public class controlServer extends controlScheduleImplBase {
 			}
 		};
 	}
-	
-	
-	public StreamObserver<energyDemandRequest> reverseStreamLighting(StreamObserver<lightingResponse> responseObserver) {
+
+@Override
+	public StreamObserver<energyDemandRequest> getLighting(StreamObserver<lightingResponse> responseObserver) {
 		return new StreamObserver<energyDemandRequest>() {
 			// For each message in the stream, get one stream at a time.
 			// NOTE: YOU MAY MODIFY THE LOGIC OF onNext, onError, onCompleted BASED ON YOUR PROJECT.
@@ -142,8 +143,9 @@ public class controlServer extends controlScheduleImplBase {
 			}
 		};
 	}
-	
-	public void viewSchedule(buildingIDRequest request,  StreamObserver<scheduleResponse> responseObserver) {
+
+@Override
+	public void getSchedule(buildingIDRequest request,  StreamObserver<scheduleResponse> responseObserver) {
 	    
 		System.out.println("receiving Building ID request");
 		
