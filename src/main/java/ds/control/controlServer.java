@@ -40,8 +40,8 @@ public class controlServer extends controlScheduleImplBase {
 		    
 		    try {
 		    // Here, we create a server on the port defined in in variable "port" and attach a service "controlServer" (instance of the class) defined above.
-		    Server server = ServerBuilder.forPort(port) // Port is defined in line 34
-		        .addService(controlserver) // Service is defined in line 31
+		    Server server = ServerBuilder.forPort(port) // Port is defined in line 39
+		        .addService(controlserver) // Service is defined in line 36
 		        .build() // Build the server
 		        .start(); // Start the server and keep it running for clients to contact.
 		    		    
@@ -88,6 +88,7 @@ public class controlServer extends controlScheduleImplBase {
 		            heatingResponse reply = heatingResponse.newBuilder().setHeatingAction(result).build();
 		      
 		            responseObserver.onNext(reply);
+		            responseObserver.onCompleted();
 				
 			}
 

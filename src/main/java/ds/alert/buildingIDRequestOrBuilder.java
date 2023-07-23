@@ -11,4 +11,9 @@ public interface buildingIDRequestOrBuilder extends
    * <code>int32 buildingID = 1;</code>
    */
   int getBuildingID();
+
+  /**
+   * <code>int32 energyReading = 2;</code>
+   */
+  int getEnergyReading();
 }

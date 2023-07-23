@@ -55,22 +55,22 @@ public final class alertImpl {
     java.lang.String[] descriptorData = {
       "\n\013alert.proto\022\005alert\"U\n\020thresholdRequest" +
       "\022\022\n\nbuildingID\030\001 \001(\005\022\030\n\020temperatureLimit" +
-      "\030\002 \001(\005\022\023\n\013energyLimit\030\003 \001(\005\"\'\n\021buildingI" +
-      "DRequest\022\022\n\nbuildingID\030\001 \001(\005\"Y\n\020sendAler" +
-      "tRequest\022\022\n\nbuildingID\030\001 \001(\005\022\032\n\022temperat" +
-      "ureReading\030\002 \001(\005\022\025\n\renergyReading\030\003 \001(\005\"" +
-      ";\n\021thresholdResponse\022\030\n\020setStatusMessage" +
-      "\030\001 \001(\t\022\014\n\004date\030\002 \001(\005\"+\n\022monitoringRespon" +
-      "se\022\025\n\rexceedMessage\030\001 \001(\t\"K\n\021sendAlertRe" +
-      "sponse\022\024\n\014alertMessage\030\001 \001(\t\022\022\n\nbuilding" +
-      "ID\030\002 \001(\005\022\014\n\004date\030\003 \001(\0052\343\001\n\014alertService\022" +
-      "C\n\014setThreshold\022\027.alert.thresholdRequest" +
-      "\032\030.alert.thresholdResponse\"\000\022L\n\023monitori" +
-      "ngThreshold\022\030.alert.buildingIDRequest\032\031." +
-      "alert.monitoringResponse0\001\022@\n\tsendAlert\022" +
-      "\027.alert.sendAlertRequest\032\030.alert.sendAle" +
-      "rtResponse(\001B\027\n\010ds.alertB\talertImplP\001b\006p" +
-      "roto3"
+      "\030\002 \001(\005\022\023\n\013energyLimit\030\003 \001(\005\">\n\021buildingI" +
+      "DRequest\022\022\n\nbuildingID\030\001 \001(\005\022\025\n\renergyRe" +
+      "ading\030\002 \001(\005\"Y\n\020sendAlertRequest\022\022\n\nbuild" +
+      "ingID\030\001 \001(\005\022\032\n\022temperatureReading\030\002 \001(\005\022" +
+      "\025\n\renergyReading\030\003 \001(\005\";\n\021thresholdRespo" +
+      "nse\022\030\n\020setStatusMessage\030\001 \001(\t\022\014\n\004date\030\002 " +
+      "\001(\005\"+\n\022monitoringResponse\022\025\n\rexceedMessa" +
+      "ge\030\001 \001(\t\"K\n\021sendAlertResponse\022\024\n\014alertMe" +
+      "ssage\030\001 \001(\t\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030" +
+      "\003 \001(\0052\343\001\n\014alertService\022C\n\014setThreshold\022\027" +
+      ".alert.thresholdRequest\032\030.alert.threshol" +
+      "dResponse\"\000\022L\n\023monitoringThreshold\022\030.ale" +
+      "rt.buildingIDRequest\032\031.alert.monitoringR" +
+      "esponse0\001\022@\n\tsendAlert\022\027.alert.sendAlert" +
+      "Request\032\030.alert.sendAlertResponse(\001B\027\n\010d" +
+      "s.alertB\talertImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -95,7 +95,7 @@ public final class alertImpl {
     internal_static_alert_buildingIDRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_alert_buildingIDRequest_descriptor,
-        new java.lang.String[] { "BuildingID", });
+        new java.lang.String[] { "BuildingID", "EnergyReading", });
     internal_static_alert_sendAlertRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_alert_sendAlertRequest_fieldAccessorTable = new

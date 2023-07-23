@@ -26,7 +26,8 @@ message thresholdRequest {
 }
 
 message buildingIDRequest {
-  int32 buildingID = 1;
+  int32 buildingID =1;
+  int32 energyReading = 2;
 }
 
 message sendAlertRequest {

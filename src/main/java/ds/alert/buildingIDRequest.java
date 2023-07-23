@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private buildingIDRequest() {
     buildingID_ = 0;
+    energyReading_ = 0;
   }
 
   @java.lang.Override
@@ -46,6 +47,11 @@ private static final long serialVersionUID = 0L;
           case 8: {
 
             buildingID_ = input.readInt32();
+            break;
+          }
+          case 16: {
+
+            energyReading_ = input.readInt32();
             break;
           }
           default: {
@@ -89,6 +95,15 @@ private static final long serialVersionUID = 0L;
     return buildingID_;
   }
 
+  public static final int ENERGYREADING_FIELD_NUMBER = 2;
+  private int energyReading_;
+  /**
+   * <code>int32 energyReading = 2;</code>
+   */
+  public int getEnergyReading() {
+    return energyReading_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -106,6 +121,9 @@ private static final long serialVersionUID = 0L;
     if (buildingID_ != 0) {
       output.writeInt32(1, buildingID_);
     }
+    if (energyReading_ != 0) {
+      output.writeInt32(2, energyReading_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -118,6 +136,10 @@ private static final long serialVersionUID = 0L;
     if (buildingID_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, buildingID_);
+    }
+    if (energyReading_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, energyReading_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -137,6 +159,8 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && (getBuildingID()
         == other.getBuildingID());
+    result = result && (getEnergyReading()
+        == other.getEnergyReading());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -150,6 +174,8 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + BUILDINGID_FIELD_NUMBER;
     hash = (53 * hash) + getBuildingID();
+    hash = (37 * hash) + ENERGYREADING_FIELD_NUMBER;
+    hash = (53 * hash) + getEnergyReading();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -285,6 +311,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       buildingID_ = 0;
 
+      energyReading_ = 0;
+
       return this;
     }
 
@@ -312,6 +340,7 @@ private static final long serialVersionUID = 0L;
     public ds.alert.buildingIDRequest buildPartial() {
       ds.alert.buildingIDRequest result = new ds.alert.buildingIDRequest(this);
       result.buildingID_ = buildingID_;
+      result.energyReading_ = energyReading_;
       onBuilt();
       return result;
     }
@@ -362,6 +391,9 @@ private static final long serialVersionUID = 0L;
       if (other == ds.alert.buildingIDRequest.getDefaultInstance()) return this;
       if (other.getBuildingID() != 0) {
         setBuildingID(other.getBuildingID());
+      }
+      if (other.getEnergyReading() != 0) {
+        setEnergyReading(other.getEnergyReading());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -414,6 +446,32 @@ private static final long serialVersionUID = 0L;
     public Builder clearBuildingID() {
       
       buildingID_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int energyReading_ ;
+    /**
+     * <code>int32 energyReading = 2;</code>
+     */
+    public int getEnergyReading() {
+      return energyReading_;
+    }
+    /**
+     * <code>int32 energyReading = 2;</code>
+     */
+    public Builder setEnergyReading(int value) {
+      
+      energyReading_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 energyReading = 2;</code>
+     */
+    public Builder clearEnergyReading() {
+      
+      energyReading_ = 0;
       onChanged();
       return this;
     }
