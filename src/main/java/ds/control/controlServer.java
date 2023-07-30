@@ -15,7 +15,7 @@ import io.grpc.ServerBuilder;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
-
+import ds.alert.thresholdResponse;
 //This is ImplBase class that was generated from the proto file.
 //You need to change this location for your projects. 
 import ds.control.controlScheduleGrpc.controlScheduleImplBase;
@@ -150,13 +150,19 @@ public class controlServer extends controlScheduleImplBase {
 	    
 		System.out.println("receiving Building ID request");
 		
-		String schedule = "Turn on heating and lighting at 8am daily. Turn off heating and lighting at 6pm daily.";
+		if (request.getBuildingID()>0) {
+			String schedule = "Turn on heating and lighting at 8am daily. Turn off heating and lighting at 6pm daily.";
+			
+			scheduleResponse reply = scheduleResponse.newBuilder().setScheduleAdvice(schedule).build();
+			
+			 responseObserver.onNext(reply);
+		     
+		     responseObserver.onCompleted();
+			} else {
+				String errorMessage = "Invalid buildingID in the request: ";
+			}
 		
-		scheduleResponse reply = scheduleResponse.newBuilder().setScheduleAdvice(schedule).build();
 		
-		 responseObserver.onNext(reply);
-	     
-	     responseObserver.onCompleted();
 	}
 
 	

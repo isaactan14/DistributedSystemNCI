@@ -76,13 +76,18 @@ public class alertServer extends alertServiceImplBase {
 	try {
 		System.out.println("receiving threshold request");
 		
+		if (request.getTemperatureLimit()>=0 && request.getEnergyLimit()>=0) {
 		String statusmessage = "Success";
-		
 		thresholdResponse reply = thresholdResponse.newBuilder().setSetStatusMessage(statusmessage).build();
 		
 		 responseObserver.onNext(reply);
 	     
 	     responseObserver.onCompleted();
+		} else {
+			String errorMessage = "Invalid threshold limit in the request: ";
+		}
+		
+
 	} catch (Exception ex) {
 	// If an error occurs, handle it here and send an appropriate error response to the client
     String errorMessage = "Error processing setThreshold request: " + ex.getMessage();
