@@ -74,48 +74,62 @@ public void getEnergyReading(buildingIDRequest request, StreamObserver<energyRea
 	try {
 	System.out.println("receiving Building ID request");
 	
-	int result=0;
 	
 	int id = request.getBuildingID();
 	switch (id) {
-	case 001: result = 50; break;
-	case 002: result = 40; break;
-	case 003: result = 70; break;
-	case 004: result = 100; break;
-	case 005: result = 120; break;
+	case 001: sendEnergyReading(50,responseObserver); break;
+	case 002: sendEnergyReading(40,responseObserver); break;
+	case 003: sendEnergyReading(70,responseObserver); break;
+	case 004: sendEnergyReading(100,responseObserver); break;
+	case 005: sendEnergyReading(120,responseObserver); break;
 	}
 	
-	energyReadingResponse reply = energyReadingResponse.newBuilder().setEnergyReading(result).build();
-	responseObserver.onNext(reply);
-	responseObserver.onCompleted();
 	} catch (Exception ex) {
         String errorMessage = "Error processing monitoringThreshold request: " + ex.getMessage();
         responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
 	}
+	responseObserver.onCompleted();
 }
-	
+
+private void sendEnergyReading(int energyReading, StreamObserver<energyReadingResponse> responseObserver) {
+	try {
+energyReadingResponse reply = energyReadingResponse.newBuilder().setEnergyReading(energyReading).build();
+responseObserver.onNext(reply);
+} catch (Exception ex) {
+	String errorMessage = "Error sending energyReading response: " + ex.getMessage();
+    responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
+	}
+}
+
 @Override
 public void getWaterReading(buildingIDRequest request, StreamObserver<waterReadingResponse> responseObserver) {
 	try {
 	System.out.println("receiving Building ID request");
 	
-	int result=0;
 	
 	int id = request.getBuildingID();
 	switch (id) {
-	case 001: result = 1000; break;
-	case 002: result = 1100; break;
-	case 003: result = 1500; break;
-	case 004: result = 1400; break;
-	case 005: result = 2000; break;
+	case 001: sendWaterReading(1000,responseObserver); break;
+	case 002: sendWaterReading(1200,responseObserver); break;
+	case 003: sendWaterReading(1700,responseObserver); break;
+	case 004: sendWaterReading(2000,responseObserver); break;
+	case 005: sendWaterReading(2200,responseObserver); break;
 	}
 	
-	waterReadingResponse reply = waterReadingResponse.newBuilder().setWaterReading(result).build();
-	responseObserver.onNext(reply);
-	responseObserver.onCompleted();
 	} catch (Exception ex) {
         String errorMessage = "Error processing monitoringThreshold request: " + ex.getMessage();
         responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
+	}
+	responseObserver.onCompleted();
+}
+
+private void sendWaterReading(int waterReading, StreamObserver<waterReadingResponse> responseObserver) {
+	try {
+waterReadingResponse reply = waterReadingResponse.newBuilder().setWaterReading(waterReading).build();
+responseObserver.onNext(reply);
+} catch (Exception ex) {
+	String errorMessage = "Error sending waterReading response: " + ex.getMessage();
+    responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
 	}
 }
 
@@ -124,23 +138,30 @@ public void getTemperatureReading(buildingIDRequest request, StreamObserver<temp
 	try {
 	System.out.println("receiving Building ID request");
 	
-	int result=0;
 	
 	int id = request.getBuildingID();
 	switch (id) {
-	case 001: result = 17; break;
-	case 002: result = 16; break;
-	case 003: result = 18; break;
-	case 004: result = 19; break;
-	case 005: result = 20; break;
+	case 001: sendTemperatureReading(15,responseObserver); break;
+	case 002: sendTemperatureReading(17,responseObserver); break;
+	case 003: sendTemperatureReading(16,responseObserver); break;
+	case 004: sendTemperatureReading(19,responseObserver); break;
+	case 005: sendTemperatureReading(20,responseObserver); break;
 	}
 	
-	temperatureReadingResponse reply = temperatureReadingResponse.newBuilder().setTemperatureReading(result).build();
-	responseObserver.onNext(reply);
-	responseObserver.onCompleted();
 	} catch (Exception ex) {
         String errorMessage = "Error processing monitoringThreshold request: " + ex.getMessage();
         responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
+	}
+	responseObserver.onCompleted();
+}
+
+private void sendTemperatureReading(int temperatureReading, StreamObserver<temperatureReadingResponse> responseObserver) {
+	try {
+temperatureReadingResponse reply = temperatureReadingResponse.newBuilder().setTemperatureReading(temperatureReading).build();
+responseObserver.onNext(reply);
+} catch (Exception ex) {
+	String errorMessage = "Error sending temperatureReading response: " + ex.getMessage();
+    responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
 	}
 }
 
