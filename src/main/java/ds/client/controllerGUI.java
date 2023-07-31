@@ -171,6 +171,12 @@ import ds.control.energyDemandRequest;
 import ds.control.heatingResponse;
 import ds.control.lightingResponse;
 import ds.control.scheduleResponse;
+import ds.livemonitor.*;
+import ds.livemonitor.energyReadingGrpc.energyReadingBlockingStub;
+import ds.livemonitor.energyReadingGrpc.energyReadingStub;
+import ds.livemonitor.energyReadingGrpc;
+import ds.livemonitor.buildingIDRequestMonitor;
+import ds.livemonitor.energyReadingResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -185,16 +191,27 @@ public class controllerGUI implements ActionListener{
 
 	// Creating stubs for establishing the connection with server.
 	// Blocking stub
-    private static controlScheduleBlockingStub blockingStub;
+    private static controlScheduleBlockingStub controlBlockingStub;
     // Asynch stub
-    private static controlScheduleGrpc.controlScheduleStub asyncStub;
+    private static controlScheduleGrpc.controlScheduleStub controlAsyncStub;
+    private static energyReadingBlockingStub energyBlockingStub;
+    // Asynch stub
+    private static energyReadingGrpc.energyReadingStub energyAsyncStub;
 
+    private static JFrame frame;
     private static JLabel heatingLabel;
     private static JLabel lightingLabel;
     private static JLabel scheduleLabel;
+    private static JLabel energyLabel;
+    private static JLabel waterLabel;
+    private static JLabel temperatureLabel;
     private static JButton heatingButton;
     private static JButton lightingButton;
     private static JButton scheduleButton;
+    private static JButton energyButton;
+    private static JButton waterButton;
+    private static JButton temperatureButton;
+    private static JTextField heatingInput, lightingInput, scheduleInput, buildingIDInput1, buildingIDInput2, buildingIDInput3 ;
 
     public static void main(String[] args) throws Exception {
         // Establish connection with the server
@@ -207,8 +224,10 @@ public class controllerGUI implements ActionListener{
 				.build();
 		
 		//stubs -- generate from proto
-		blockingStub = controlScheduleGrpc.newBlockingStub(channel);
-		asyncStub = controlScheduleGrpc.newStub(channel);
+		controlBlockingStub = controlScheduleGrpc.newBlockingStub(channel);
+		controlAsyncStub = controlScheduleGrpc.newStub(channel);
+		energyBlockingStub = energyReadingGrpc.newBlockingStub(channel);
+		energyAsyncStub = energyReadingGrpc.newStub(channel);
 		
 		//initialize the Swing GUI
         SwingUtilities.invokeLater(() -> {
@@ -227,18 +246,30 @@ public class controllerGUI implements ActionListener{
 
     private static void createAndShowGUI() {
         // Create the main frame
-        JFrame frame = new JFrame("Controller GUI");
+    	frame = new JFrame("Controller GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(2, 2, 10, 10));
-        frame.setSize(400, 200);
+        frame.setLayout(new GridLayout(7, 3, 10, 10));
+        frame.setSize(1000, 500);
 
         // Create labels and buttons
-        heatingLabel = new JLabel("Heating Action: ");
-        lightingLabel = new JLabel("Lighting Action: ");
-        scheduleLabel = new JLabel("Schedule: ");
+        heatingLabel = new JLabel("Enter energy consumption in kWh. Heating Action: ");
+        lightingLabel = new JLabel("Enter energy consumption in kWh. Lighting Action: ");
+        scheduleLabel = new JLabel("Enter building ID. Schedule: ");
+        energyLabel = new JLabel("Enter building ID. Energy Reading: ");
+        waterLabel = new JLabel("Enter building ID. Water Reading: ");
+        temperatureLabel = new JLabel("Enter building ID. Temperature Reading: ");
+        heatingInput = new JTextField();
+        lightingInput = new JTextField();
+        scheduleInput = new JTextField();
+        buildingIDInput1 = new JTextField();
+        buildingIDInput2 = new JTextField();
+        buildingIDInput3 = new JTextField();
         heatingButton = new JButton("Get Heating Action");
         lightingButton = new JButton("Get Lighting Action");
         scheduleButton = new JButton("View Schedule");
+        energyButton = new JButton("Get Energy Reading");
+        waterButton = new JButton("Get Water Reading");
+        temperatureButton = new JButton("Get Temperature Reading");
 
         // Add action listeners to the buttons
         heatingButton.addActionListener(new ActionListener() {
@@ -260,16 +291,49 @@ public class controllerGUI implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 viewSchedule();
             }
+            
+        });
+        
+        energyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getEnergyReading();
+            }
+        });
+        
+        waterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getWaterReading();
+            }
+        });
+        
+        temperatureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getTemperatureReading();
+            }
         });
 
         // Add components to the frame
         frame.add(heatingLabel);
+        frame.add(heatingInput);
         frame.add(heatingButton);
         frame.add(lightingLabel);
+        frame.add(lightingInput);
         frame.add(lightingButton);
-        frame.add(new JLabel());
         frame.add(scheduleLabel);
+        frame.add(scheduleInput);
         frame.add(scheduleButton);
+        frame.add(energyLabel);
+        frame.add(buildingIDInput1);
+        frame.add(energyButton);
+        frame.add(waterLabel);
+        frame.add(buildingIDInput2);
+        frame.add(waterButton);
+        frame.add(temperatureLabel);
+        frame.add(buildingIDInput3);
+        frame.add(temperatureButton);
 
         // Show the GUI
         frame.setVisible(true);
@@ -277,7 +341,11 @@ public class controllerGUI implements ActionListener{
     }
 
     private static void getHeatingAction() {
-        energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(energyDemandRequest.ENERGYDEMAND_FIELD_NUMBER).build();
+        
+        String sheatingAction = heatingInput.getText();
+        int heatingAction = Integer.parseInt(sheatingAction);
+        
+        energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(heatingAction).build();
         try {
             heatingLabel.setText("Heating Action: ");
             StreamObserver<heatingResponse> responseObserver = new StreamObserver<heatingResponse>() {
@@ -297,7 +365,7 @@ public class controllerGUI implements ActionListener{
                 }
             };
 
-            StreamObserver<energyDemandRequest> requestObserver = asyncStub.getHeating(responseObserver);
+            StreamObserver<energyDemandRequest> requestObserver = controlAsyncStub.getHeating(responseObserver);
             requestObserver.onNext(req);
             requestObserver.onCompleted();
         } catch (StatusRuntimeException ex) {
@@ -306,7 +374,11 @@ public class controllerGUI implements ActionListener{
     }
     
     private static void getLightingAction() {
-        energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(energyDemandRequest.ENERGYDEMAND_FIELD_NUMBER).build();
+        String slightingAction = lightingInput.getText();
+        int lightingAction = Integer.parseInt(slightingAction);
+        
+    	energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(lightingAction).build();
+       
         try {
             lightingLabel.setText("Lighting Action: ");
             StreamObserver<lightingResponse> responseObserver = new StreamObserver<lightingResponse>() {
@@ -326,7 +398,7 @@ public class controllerGUI implements ActionListener{
                 }
             };
 
-            StreamObserver<energyDemandRequest> requestObserver = asyncStub.getLighting(responseObserver);
+            StreamObserver<energyDemandRequest> requestObserver = controlAsyncStub.getLighting(responseObserver);
             requestObserver.onNext(req);
             requestObserver.onCompleted();
         } catch (StatusRuntimeException ex) {
@@ -335,15 +407,114 @@ public class controllerGUI implements ActionListener{
     }
 
     private static void viewSchedule() {
-        buildingIDRequest req = buildingIDRequest.newBuilder().setBuildingID(buildingIDRequest.BUILDINGID_FIELD_NUMBER).build();
+    	String sbuildingID = scheduleInput.getText();
+    	int buildingID = Integer.parseInt(sbuildingID);
+    	
+        buildingIDRequest req = buildingIDRequest.newBuilder().setBuildingID(buildingID).build();
         try {
-            scheduleResponse response = blockingStub.getSchedule(req);
+            scheduleResponse response = controlBlockingStub.getSchedule(req);
             JOptionPane.showMessageDialog(null, "Schedule: " + response.getScheduleAdvice(), "Schedule", JOptionPane.INFORMATION_MESSAGE);
         } catch (StatusRuntimeException ex) {
             JOptionPane.showMessageDialog(null, "Error getting Schedule: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+   private static void getEnergyReading() {
+        String sbuildingID = buildingIDInput1.getText();
+        int  buildingID= Integer.parseInt(sbuildingID);
+        
+    	buildingIDRequestMonitor req = buildingIDRequestMonitor.newBuilder().setBuildingID(buildingID).build();
+       
+        try {
+            energyLabel.setText("Energy Reading: ");
+            StreamObserver<energyReadingResponse> responseObserver = new StreamObserver<energyReadingResponse>() {
+                @Override
+                public void onNext(energyReadingResponse response) {
+                    energyLabel.setText("Energy Reading: " + response.getEnergyReading());
+                }
 
+                @Override
+                public void onError(Throwable t) {
+                    energyLabel.setText("Error getting Energy Reading: " + t.getMessage());
+                }
+
+                @Override
+                public void onCompleted() {
+                    System.out.println("Energy Reading request completed.");
+                }
+            };
+
+            energyAsyncStub.getEnergyReading(req, responseObserver);
+
+        } catch (StatusRuntimeException ex) {
+            energyLabel.setText("Error getting Energy Reading: " + ex.getMessage());
+        }
+    }
+    
+   private static void getWaterReading() {
+       String sbuildingID = buildingIDInput2.getText();
+       int  buildingID= Integer.parseInt(sbuildingID);
+       
+   	buildingIDRequestMonitor req = buildingIDRequestMonitor.newBuilder().setBuildingID(buildingID).build();
+      
+       try {
+           waterLabel.setText("Water Reading: ");
+           StreamObserver<waterReadingResponse> responseObserver = new StreamObserver<waterReadingResponse>() {
+               @Override
+               public void onNext(waterReadingResponse response) {
+                   waterLabel.setText("Water Reading: " + response.getWaterReading());
+               }
+
+               @Override
+               public void onError(Throwable t) {
+                   waterLabel.setText("Error getting Water Reading: " + t.getMessage());
+               }
+
+               @Override
+               public void onCompleted() {
+                   System.out.println("Water Reading request completed.");
+               }
+           };
+
+           energyAsyncStub.getWaterReading(req, responseObserver);
+
+       } catch (StatusRuntimeException ex) {
+           energyLabel.setText("Error getting Energy Reading: " + ex.getMessage());
+       }
+   }
+   
+   private static void getTemperatureReading() {
+       String sbuildingID = buildingIDInput3.getText();
+       int  buildingID= Integer.parseInt(sbuildingID);
+       
+   	buildingIDRequestMonitor req = buildingIDRequestMonitor.newBuilder().setBuildingID(buildingID).build();
+      
+       try {
+           temperatureLabel.setText("Temperature Reading: ");
+           StreamObserver<temperatureReadingResponse> responseObserver = new StreamObserver<temperatureReadingResponse>() {
+               @Override
+               public void onNext(temperatureReadingResponse response) {
+                   temperatureLabel.setText("Tempeature Reading: " + response.getTemperatureReading());
+               }
+
+               @Override
+               public void onError(Throwable t) {
+                   temperatureLabel.setText("Error getting Temperature Reading: " + t.getMessage());
+               }
+
+               @Override
+               public void onCompleted() {
+                   System.out.println("Temperature Reading request completed.");
+               }
+           };
+
+           energyAsyncStub.getTemperatureReading(req, responseObserver);
+
+       } catch (StatusRuntimeException ex) {
+           energyLabel.setText("Error getting Temperature Reading: " + ex.getMessage());
+       }
+   }
+   
 @Override
 public void actionPerformed(ActionEvent e) {
     // Handle button clicks here
@@ -353,6 +524,12 @@ public void actionPerformed(ActionEvent e) {
         getLightingAction();
     } else if (e.getSource() == scheduleButton) {
         viewSchedule();
+    } else if (e.getSource() == energyButton) {
+        getEnergyReading();
+    } else if (e.getSource() == waterButton) {
+        getWaterReading();
+    } else if (e.getSource() == temperatureButton) {
+        getTemperatureReading();
     }
-}
+	}
 }

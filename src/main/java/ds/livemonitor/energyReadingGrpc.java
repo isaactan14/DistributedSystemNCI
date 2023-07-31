@@ -31,28 +31,28 @@ public final class energyReadingGrpc {
   public static final String SERVICE_NAME = "livemonitor.energyReading";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest,
+  private static volatile io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor,
       ds.livemonitor.energyReadingResponse> getGetEnergyReadingMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getEnergyReading",
-      requestType = ds.livemonitor.buildingIDRequest.class,
+      requestType = ds.livemonitor.buildingIDRequestMonitor.class,
       responseType = ds.livemonitor.energyReadingResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest,
+  public static io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor,
       ds.livemonitor.energyReadingResponse> getGetEnergyReadingMethod() {
-    io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest, ds.livemonitor.energyReadingResponse> getGetEnergyReadingMethod;
+    io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor, ds.livemonitor.energyReadingResponse> getGetEnergyReadingMethod;
     if ((getGetEnergyReadingMethod = energyReadingGrpc.getGetEnergyReadingMethod) == null) {
       synchronized (energyReadingGrpc.class) {
         if ((getGetEnergyReadingMethod = energyReadingGrpc.getGetEnergyReadingMethod) == null) {
           energyReadingGrpc.getGetEnergyReadingMethod = getGetEnergyReadingMethod = 
-              io.grpc.MethodDescriptor.<ds.livemonitor.buildingIDRequest, ds.livemonitor.energyReadingResponse>newBuilder()
+              io.grpc.MethodDescriptor.<ds.livemonitor.buildingIDRequestMonitor, ds.livemonitor.energyReadingResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "livemonitor.energyReading", "getEnergyReading"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.livemonitor.buildingIDRequest.getDefaultInstance()))
+                  ds.livemonitor.buildingIDRequestMonitor.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   ds.livemonitor.energyReadingResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new energyReadingMethodDescriptorSupplier("getEnergyReading"))
@@ -63,28 +63,28 @@ public final class energyReadingGrpc {
      return getGetEnergyReadingMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest,
+  private static volatile io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor,
       ds.livemonitor.waterReadingResponse> getGetWaterReadingMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getWaterReading",
-      requestType = ds.livemonitor.buildingIDRequest.class,
+      requestType = ds.livemonitor.buildingIDRequestMonitor.class,
       responseType = ds.livemonitor.waterReadingResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest,
+  public static io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor,
       ds.livemonitor.waterReadingResponse> getGetWaterReadingMethod() {
-    io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest, ds.livemonitor.waterReadingResponse> getGetWaterReadingMethod;
+    io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor, ds.livemonitor.waterReadingResponse> getGetWaterReadingMethod;
     if ((getGetWaterReadingMethod = energyReadingGrpc.getGetWaterReadingMethod) == null) {
       synchronized (energyReadingGrpc.class) {
         if ((getGetWaterReadingMethod = energyReadingGrpc.getGetWaterReadingMethod) == null) {
           energyReadingGrpc.getGetWaterReadingMethod = getGetWaterReadingMethod = 
-              io.grpc.MethodDescriptor.<ds.livemonitor.buildingIDRequest, ds.livemonitor.waterReadingResponse>newBuilder()
+              io.grpc.MethodDescriptor.<ds.livemonitor.buildingIDRequestMonitor, ds.livemonitor.waterReadingResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "livemonitor.energyReading", "getWaterReading"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.livemonitor.buildingIDRequest.getDefaultInstance()))
+                  ds.livemonitor.buildingIDRequestMonitor.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   ds.livemonitor.waterReadingResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new energyReadingMethodDescriptorSupplier("getWaterReading"))
@@ -95,28 +95,28 @@ public final class energyReadingGrpc {
      return getGetWaterReadingMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest,
+  private static volatile io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor,
       ds.livemonitor.temperatureReadingResponse> getGetTemperatureReadingMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getTemperatureReading",
-      requestType = ds.livemonitor.buildingIDRequest.class,
+      requestType = ds.livemonitor.buildingIDRequestMonitor.class,
       responseType = ds.livemonitor.temperatureReadingResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest,
+  public static io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor,
       ds.livemonitor.temperatureReadingResponse> getGetTemperatureReadingMethod() {
-    io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequest, ds.livemonitor.temperatureReadingResponse> getGetTemperatureReadingMethod;
+    io.grpc.MethodDescriptor<ds.livemonitor.buildingIDRequestMonitor, ds.livemonitor.temperatureReadingResponse> getGetTemperatureReadingMethod;
     if ((getGetTemperatureReadingMethod = energyReadingGrpc.getGetTemperatureReadingMethod) == null) {
       synchronized (energyReadingGrpc.class) {
         if ((getGetTemperatureReadingMethod = energyReadingGrpc.getGetTemperatureReadingMethod) == null) {
           energyReadingGrpc.getGetTemperatureReadingMethod = getGetTemperatureReadingMethod = 
-              io.grpc.MethodDescriptor.<ds.livemonitor.buildingIDRequest, ds.livemonitor.temperatureReadingResponse>newBuilder()
+              io.grpc.MethodDescriptor.<ds.livemonitor.buildingIDRequestMonitor, ds.livemonitor.temperatureReadingResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "livemonitor.energyReading", "getTemperatureReading"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.livemonitor.buildingIDRequest.getDefaultInstance()))
+                  ds.livemonitor.buildingIDRequestMonitor.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   ds.livemonitor.temperatureReadingResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new energyReadingMethodDescriptorSupplier("getTemperatureReading"))
@@ -160,21 +160,21 @@ public final class energyReadingGrpc {
 
     /**
      */
-    public void getEnergyReading(ds.livemonitor.buildingIDRequest request,
+    public void getEnergyReading(ds.livemonitor.buildingIDRequestMonitor request,
         io.grpc.stub.StreamObserver<ds.livemonitor.energyReadingResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetEnergyReadingMethod(), responseObserver);
     }
 
     /**
      */
-    public void getWaterReading(ds.livemonitor.buildingIDRequest request,
+    public void getWaterReading(ds.livemonitor.buildingIDRequestMonitor request,
         io.grpc.stub.StreamObserver<ds.livemonitor.waterReadingResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetWaterReadingMethod(), responseObserver);
     }
 
     /**
      */
-    public void getTemperatureReading(ds.livemonitor.buildingIDRequest request,
+    public void getTemperatureReading(ds.livemonitor.buildingIDRequestMonitor request,
         io.grpc.stub.StreamObserver<ds.livemonitor.temperatureReadingResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetTemperatureReadingMethod(), responseObserver);
     }
@@ -185,21 +185,21 @@ public final class energyReadingGrpc {
             getGetEnergyReadingMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                ds.livemonitor.buildingIDRequest,
+                ds.livemonitor.buildingIDRequestMonitor,
                 ds.livemonitor.energyReadingResponse>(
                   this, METHODID_GET_ENERGY_READING)))
           .addMethod(
             getGetWaterReadingMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                ds.livemonitor.buildingIDRequest,
+                ds.livemonitor.buildingIDRequestMonitor,
                 ds.livemonitor.waterReadingResponse>(
                   this, METHODID_GET_WATER_READING)))
           .addMethod(
             getGetTemperatureReadingMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                ds.livemonitor.buildingIDRequest,
+                ds.livemonitor.buildingIDRequestMonitor,
                 ds.livemonitor.temperatureReadingResponse>(
                   this, METHODID_GET_TEMPERATURE_READING)))
           .build();
@@ -230,7 +230,7 @@ public final class energyReadingGrpc {
 
     /**
      */
-    public void getEnergyReading(ds.livemonitor.buildingIDRequest request,
+    public void getEnergyReading(ds.livemonitor.buildingIDRequestMonitor request,
         io.grpc.stub.StreamObserver<ds.livemonitor.energyReadingResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getGetEnergyReadingMethod(), getCallOptions()), request, responseObserver);
@@ -238,7 +238,7 @@ public final class energyReadingGrpc {
 
     /**
      */
-    public void getWaterReading(ds.livemonitor.buildingIDRequest request,
+    public void getWaterReading(ds.livemonitor.buildingIDRequestMonitor request,
         io.grpc.stub.StreamObserver<ds.livemonitor.waterReadingResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getGetWaterReadingMethod(), getCallOptions()), request, responseObserver);
@@ -246,7 +246,7 @@ public final class energyReadingGrpc {
 
     /**
      */
-    public void getTemperatureReading(ds.livemonitor.buildingIDRequest request,
+    public void getTemperatureReading(ds.livemonitor.buildingIDRequestMonitor request,
         io.grpc.stub.StreamObserver<ds.livemonitor.temperatureReadingResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getGetTemperatureReadingMethod(), getCallOptions()), request, responseObserver);
@@ -278,7 +278,7 @@ public final class energyReadingGrpc {
     /**
      */
     public java.util.Iterator<ds.livemonitor.energyReadingResponse> getEnergyReading(
-        ds.livemonitor.buildingIDRequest request) {
+        ds.livemonitor.buildingIDRequestMonitor request) {
       return blockingServerStreamingCall(
           getChannel(), getGetEnergyReadingMethod(), getCallOptions(), request);
     }
@@ -286,7 +286,7 @@ public final class energyReadingGrpc {
     /**
      */
     public java.util.Iterator<ds.livemonitor.waterReadingResponse> getWaterReading(
-        ds.livemonitor.buildingIDRequest request) {
+        ds.livemonitor.buildingIDRequestMonitor request) {
       return blockingServerStreamingCall(
           getChannel(), getGetWaterReadingMethod(), getCallOptions(), request);
     }
@@ -294,7 +294,7 @@ public final class energyReadingGrpc {
     /**
      */
     public java.util.Iterator<ds.livemonitor.temperatureReadingResponse> getTemperatureReading(
-        ds.livemonitor.buildingIDRequest request) {
+        ds.livemonitor.buildingIDRequestMonitor request) {
       return blockingServerStreamingCall(
           getChannel(), getGetTemperatureReadingMethod(), getCallOptions(), request);
     }
@@ -345,15 +345,15 @@ public final class energyReadingGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_ENERGY_READING:
-          serviceImpl.getEnergyReading((ds.livemonitor.buildingIDRequest) request,
+          serviceImpl.getEnergyReading((ds.livemonitor.buildingIDRequestMonitor) request,
               (io.grpc.stub.StreamObserver<ds.livemonitor.energyReadingResponse>) responseObserver);
           break;
         case METHODID_GET_WATER_READING:
-          serviceImpl.getWaterReading((ds.livemonitor.buildingIDRequest) request,
+          serviceImpl.getWaterReading((ds.livemonitor.buildingIDRequestMonitor) request,
               (io.grpc.stub.StreamObserver<ds.livemonitor.waterReadingResponse>) responseObserver);
           break;
         case METHODID_GET_TEMPERATURE_READING:
-          serviceImpl.getTemperatureReading((ds.livemonitor.buildingIDRequest) request,
+          serviceImpl.getTemperatureReading((ds.livemonitor.buildingIDRequestMonitor) request,
               (io.grpc.stub.StreamObserver<ds.livemonitor.temperatureReadingResponse>) responseObserver);
           break;
         default:

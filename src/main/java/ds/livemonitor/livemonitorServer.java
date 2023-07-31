@@ -70,7 +70,7 @@ public class livemonitorServer extends energyReadingImplBase{
 
 
 @Override
-public void getEnergyReading(buildingIDRequest request, StreamObserver<energyReadingResponse> responseObserver) {
+public void getEnergyReading(buildingIDRequestMonitor request, StreamObserver<energyReadingResponse> responseObserver) {
 	try {
 	System.out.println("receiving Building ID request");
 	
@@ -102,7 +102,7 @@ responseObserver.onNext(reply);
 }
 
 @Override
-public void getWaterReading(buildingIDRequest request, StreamObserver<waterReadingResponse> responseObserver) {
+public void getWaterReading(buildingIDRequestMonitor request, StreamObserver<waterReadingResponse> responseObserver) {
 	try {
 	System.out.println("receiving Building ID request");
 	
@@ -134,7 +134,7 @@ responseObserver.onNext(reply);
 }
 
 @Override
-public void getTemperatureReading(buildingIDRequest request, StreamObserver<temperatureReadingResponse> responseObserver) {
+public void getTemperatureReading(buildingIDRequestMonitor request, StreamObserver<temperatureReadingResponse> responseObserver) {
 	try {
 	System.out.println("receiving Building ID request");
 	

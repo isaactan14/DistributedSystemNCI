@@ -11,15 +11,15 @@ package livemonitor;
 // Interface exported by the server.
 //server streaming RPC for all methods
 service energyReading {
-	rpc getEnergyReading(buildingIDRequest) returns (stream energyReadingResponse);
-	rpc getWaterReading(buildingIDRequest) returns (stream waterReadingResponse);
-	rpc getTemperatureReading(buildingIDRequest) returns (stream temperatureReadingResponse);
+	rpc getEnergyReading(buildingIDRequestMonitor) returns (stream energyReadingResponse);
+	rpc getWaterReading(buildingIDRequestMonitor) returns (stream waterReadingResponse);
+	rpc getTemperatureReading(buildingIDRequestMonitor) returns (stream temperatureReadingResponse);
 }
 
 // define each variable in rpc method separately
 //3 methods in a service
 
-message buildingIDRequest {
+message buildingIDRequestMonitor {
   int32 buildingID = 1;
 }
 

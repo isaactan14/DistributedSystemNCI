@@ -15,10 +15,10 @@ public final class livemonitorImpl {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_livemonitor_buildingIDRequest_descriptor;
+    internal_static_livemonitor_buildingIDRequestMonitor_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_livemonitor_buildingIDRequest_fieldAccessorTable;
+      internal_static_livemonitor_buildingIDRequestMonitor_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_livemonitor_energyReadingResponse_descriptor;
   static final 
@@ -43,23 +43,24 @@ public final class livemonitorImpl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021livemonitor.proto\022\013livemonitor\"\'\n\021buil" +
-      "dingIDRequest\022\022\n\nbuildingID\030\001 \001(\005\"P\n\025ene" +
-      "rgyReadingResponse\022\025\n\renergyReading\030\001 \001(" +
-      "\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030\003 \001(\005\"N\n\024w" +
-      "aterReadingResponse\022\024\n\014waterReading\030\001 \001(" +
-      "\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030\003 \001(\005\"Z\n\032t" +
-      "emperatureReadingResponse\022\032\n\022temperature" +
-      "Reading\030\001 \001(\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004dat" +
-      "e\030\003 \001(\0052\245\002\n\renergyReading\022X\n\020getEnergyRe" +
-      "ading\022\036.livemonitor.buildingIDRequest\032\"." +
-      "livemonitor.energyReadingResponse0\001\022V\n\017g" +
-      "etWaterReading\022\036.livemonitor.buildingIDR" +
-      "equest\032!.livemonitor.waterReadingRespons" +
-      "e0\001\022b\n\025getTemperatureReading\022\036.livemonit" +
-      "or.buildingIDRequest\032\'.livemonitor.tempe" +
-      "ratureReadingResponse0\001B#\n\016ds.livemonito" +
-      "rB\017livemonitorImplP\001b\006proto3"
+      "\n\021livemonitor.proto\022\013livemonitor\".\n\030buil" +
+      "dingIDRequestMonitor\022\022\n\nbuildingID\030\001 \001(\005" +
+      "\"P\n\025energyReadingResponse\022\025\n\renergyReadi" +
+      "ng\030\001 \001(\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030\003 \001" +
+      "(\005\"N\n\024waterReadingResponse\022\024\n\014waterReadi" +
+      "ng\030\001 \001(\005\022\022\n\nbuildingID\030\002 \001(\005\022\014\n\004date\030\003 \001" +
+      "(\005\"Z\n\032temperatureReadingResponse\022\032\n\022temp" +
+      "eratureReading\030\001 \001(\005\022\022\n\nbuildingID\030\002 \001(\005" +
+      "\022\014\n\004date\030\003 \001(\0052\272\002\n\renergyReading\022_\n\020getE" +
+      "nergyReading\022%.livemonitor.buildingIDReq" +
+      "uestMonitor\032\".livemonitor.energyReadingR" +
+      "esponse0\001\022]\n\017getWaterReading\022%.livemonit" +
+      "or.buildingIDRequestMonitor\032!.livemonito" +
+      "r.waterReadingResponse0\001\022i\n\025getTemperatu" +
+      "reReading\022%.livemonitor.buildingIDReques" +
+      "tMonitor\032\'.livemonitor.temperatureReadin" +
+      "gResponse0\001B#\n\016ds.livemonitorB\017livemonit" +
+      "orImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -73,11 +74,11 @@ public final class livemonitorImpl {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_livemonitor_buildingIDRequest_descriptor =
+    internal_static_livemonitor_buildingIDRequestMonitor_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_livemonitor_buildingIDRequest_fieldAccessorTable = new
+    internal_static_livemonitor_buildingIDRequestMonitor_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_livemonitor_buildingIDRequest_descriptor,
+        internal_static_livemonitor_buildingIDRequestMonitor_descriptor,
         new java.lang.String[] { "BuildingID", });
     internal_static_livemonitor_energyReadingResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);

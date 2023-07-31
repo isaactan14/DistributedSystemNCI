@@ -109,7 +109,8 @@ public class controlServer extends controlScheduleImplBase {
 @Override
 	public StreamObserver<energyDemandRequest> getLighting(StreamObserver<lightingResponse> responseObserver) {
 		return new StreamObserver<energyDemandRequest>() {
-			// For each message in the stream, get one stream at a time.
+		
+			 // For each message in the stream, get one stream at a time.
 			// NOTE: YOU MAY MODIFY THE LOGIC OF onNext, onError, onCompleted BASED ON YOUR PROJECT.
 			@Override
 			public void onNext(energyDemandRequest request) {
@@ -133,7 +134,7 @@ public class controlServer extends controlScheduleImplBase {
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stubal
+				// TODO Auto-generated method stub
 				
 			}
 
