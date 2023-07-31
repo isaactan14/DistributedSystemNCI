@@ -12,7 +12,7 @@ package alert;
 //1 unary RPC, 1 server streaming RPC and 1 client streaming RPC
 service alertService {
 	rpc setThreshold(thresholdRequest) returns (thresholdResponse) {};
-	rpc monitoringThreshold(buildingIDRequest) returns (stream monitoringResponse);
+	rpc monitoringThreshold(buildingIDRequestAlert) returns (stream monitoringResponse);
 	rpc sendAlert(stream sendAlertRequest) returns (sendAlertResponse);
 }
 
@@ -25,7 +25,7 @@ message thresholdRequest {
   int32 energyLimit = 3;
 }
 
-message buildingIDRequest {
+message buildingIDRequestAlert {
   int32 buildingID =1;
   int32 energyReading = 2;
 }

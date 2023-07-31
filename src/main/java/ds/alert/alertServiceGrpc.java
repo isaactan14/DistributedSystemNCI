@@ -63,28 +63,28 @@ public final class alertServiceGrpc {
      return getSetThresholdMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<ds.alert.buildingIDRequest,
+  private static volatile io.grpc.MethodDescriptor<ds.alert.buildingIDRequestAlert,
       ds.alert.monitoringResponse> getMonitoringThresholdMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "monitoringThreshold",
-      requestType = ds.alert.buildingIDRequest.class,
+      requestType = ds.alert.buildingIDRequestAlert.class,
       responseType = ds.alert.monitoringResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<ds.alert.buildingIDRequest,
+  public static io.grpc.MethodDescriptor<ds.alert.buildingIDRequestAlert,
       ds.alert.monitoringResponse> getMonitoringThresholdMethod() {
-    io.grpc.MethodDescriptor<ds.alert.buildingIDRequest, ds.alert.monitoringResponse> getMonitoringThresholdMethod;
+    io.grpc.MethodDescriptor<ds.alert.buildingIDRequestAlert, ds.alert.monitoringResponse> getMonitoringThresholdMethod;
     if ((getMonitoringThresholdMethod = alertServiceGrpc.getMonitoringThresholdMethod) == null) {
       synchronized (alertServiceGrpc.class) {
         if ((getMonitoringThresholdMethod = alertServiceGrpc.getMonitoringThresholdMethod) == null) {
           alertServiceGrpc.getMonitoringThresholdMethod = getMonitoringThresholdMethod = 
-              io.grpc.MethodDescriptor.<ds.alert.buildingIDRequest, ds.alert.monitoringResponse>newBuilder()
+              io.grpc.MethodDescriptor.<ds.alert.buildingIDRequestAlert, ds.alert.monitoringResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "alert.alertService", "monitoringThreshold"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.alert.buildingIDRequest.getDefaultInstance()))
+                  ds.alert.buildingIDRequestAlert.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   ds.alert.monitoringResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new alertServiceMethodDescriptorSupplier("monitoringThreshold"))
@@ -167,7 +167,7 @@ public final class alertServiceGrpc {
 
     /**
      */
-    public void monitoringThreshold(ds.alert.buildingIDRequest request,
+    public void monitoringThreshold(ds.alert.buildingIDRequestAlert request,
         io.grpc.stub.StreamObserver<ds.alert.monitoringResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getMonitoringThresholdMethod(), responseObserver);
     }
@@ -192,7 +192,7 @@ public final class alertServiceGrpc {
             getMonitoringThresholdMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                ds.alert.buildingIDRequest,
+                ds.alert.buildingIDRequestAlert,
                 ds.alert.monitoringResponse>(
                   this, METHODID_MONITORING_THRESHOLD)))
           .addMethod(
@@ -238,7 +238,7 @@ public final class alertServiceGrpc {
 
     /**
      */
-    public void monitoringThreshold(ds.alert.buildingIDRequest request,
+    public void monitoringThreshold(ds.alert.buildingIDRequestAlert request,
         io.grpc.stub.StreamObserver<ds.alert.monitoringResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getMonitoringThresholdMethod(), getCallOptions()), request, responseObserver);
@@ -285,7 +285,7 @@ public final class alertServiceGrpc {
     /**
      */
     public java.util.Iterator<ds.alert.monitoringResponse> monitoringThreshold(
-        ds.alert.buildingIDRequest request) {
+        ds.alert.buildingIDRequestAlert request) {
       return blockingServerStreamingCall(
           getChannel(), getMonitoringThresholdMethod(), getCallOptions(), request);
     }
@@ -348,7 +348,7 @@ public final class alertServiceGrpc {
               (io.grpc.stub.StreamObserver<ds.alert.thresholdResponse>) responseObserver);
           break;
         case METHODID_MONITORING_THRESHOLD:
-          serviceImpl.monitoringThreshold((ds.alert.buildingIDRequest) request,
+          serviceImpl.monitoringThreshold((ds.alert.buildingIDRequestAlert) request,
               (io.grpc.stub.StreamObserver<ds.alert.monitoringResponse>) responseObserver);
           break;
         default:

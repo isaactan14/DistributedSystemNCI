@@ -4,18 +4,18 @@
 package ds.alert;
 
 /**
- * Protobuf type {@code alert.buildingIDRequest}
+ * Protobuf type {@code alert.buildingIDRequestAlert}
  */
-public  final class buildingIDRequest extends
+public  final class buildingIDRequestAlert extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:alert.buildingIDRequest)
-    buildingIDRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:alert.buildingIDRequestAlert)
+    buildingIDRequestAlertOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use buildingIDRequest.newBuilder() to construct.
-  private buildingIDRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use buildingIDRequestAlert.newBuilder() to construct.
+  private buildingIDRequestAlert(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private buildingIDRequest() {
+  private buildingIDRequestAlert() {
     buildingID_ = 0;
     energyReading_ = 0;
   }
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private buildingIDRequest(
+  private buildingIDRequestAlert(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -83,7 +83,7 @@ private static final long serialVersionUID = 0L;
       internalGetFieldAccessorTable() {
     return ds.alert.alertImpl.internal_static_alert_buildingIDRequestAlert_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ds.alert.buildingIDRequest.class, ds.alert.buildingIDRequest.Builder.class);
+            ds.alert.buildingIDRequestAlert.class, ds.alert.buildingIDRequestAlert.Builder.class);
   }
 
   public static final int BUILDINGID_FIELD_NUMBER = 1;
@@ -151,10 +151,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ds.alert.buildingIDRequest)) {
+    if (!(obj instanceof ds.alert.buildingIDRequestAlert)) {
       return super.equals(obj);
     }
-    ds.alert.buildingIDRequest other = (ds.alert.buildingIDRequest) obj;
+    ds.alert.buildingIDRequestAlert other = (ds.alert.buildingIDRequestAlert) obj;
 
     boolean result = true;
     result = result && (getBuildingID()
@@ -181,69 +181,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ds.alert.buildingIDRequest parseFrom(byte[] data)
+  public static ds.alert.buildingIDRequestAlert parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ds.alert.buildingIDRequest parseFrom(java.io.InputStream input)
+  public static ds.alert.buildingIDRequestAlert parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ds.alert.buildingIDRequest parseDelimitedFrom(java.io.InputStream input)
+  public static ds.alert.buildingIDRequestAlert parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ds.alert.buildingIDRequest parseDelimitedFrom(
+  public static ds.alert.buildingIDRequestAlert parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ds.alert.buildingIDRequest parseFrom(
+  public static ds.alert.buildingIDRequestAlert parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -256,7 +256,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ds.alert.buildingIDRequest prototype) {
+  public static Builder newBuilder(ds.alert.buildingIDRequestAlert prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -272,12 +272,12 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code alert.buildingIDRequest}
+   * Protobuf type {@code alert.buildingIDRequestAlert}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:alert.buildingIDRequest)
-      ds.alert.buildingIDRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:alert.buildingIDRequestAlert)
+      ds.alert.buildingIDRequestAlertOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return ds.alert.alertImpl.internal_static_alert_buildingIDRequestAlert_descriptor;
@@ -288,10 +288,10 @@ private static final long serialVersionUID = 0L;
         internalGetFieldAccessorTable() {
       return ds.alert.alertImpl.internal_static_alert_buildingIDRequestAlert_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ds.alert.buildingIDRequest.class, ds.alert.buildingIDRequest.Builder.class);
+              ds.alert.buildingIDRequestAlert.class, ds.alert.buildingIDRequestAlert.Builder.class);
     }
 
-    // Construct using ds.alert.buildingIDRequest.newBuilder()
+    // Construct using ds.alert.buildingIDRequestAlert.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -323,13 +323,13 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ds.alert.buildingIDRequest getDefaultInstanceForType() {
-      return ds.alert.buildingIDRequest.getDefaultInstance();
+    public ds.alert.buildingIDRequestAlert getDefaultInstanceForType() {
+      return ds.alert.buildingIDRequestAlert.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ds.alert.buildingIDRequest build() {
-      ds.alert.buildingIDRequest result = buildPartial();
+    public ds.alert.buildingIDRequestAlert build() {
+      ds.alert.buildingIDRequestAlert result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -337,8 +337,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ds.alert.buildingIDRequest buildPartial() {
-      ds.alert.buildingIDRequest result = new ds.alert.buildingIDRequest(this);
+    public ds.alert.buildingIDRequestAlert buildPartial() {
+      ds.alert.buildingIDRequestAlert result = new ds.alert.buildingIDRequestAlert(this);
       result.buildingID_ = buildingID_;
       result.energyReading_ = energyReading_;
       onBuilt();
@@ -379,16 +379,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ds.alert.buildingIDRequest) {
-        return mergeFrom((ds.alert.buildingIDRequest)other);
+      if (other instanceof ds.alert.buildingIDRequestAlert) {
+        return mergeFrom((ds.alert.buildingIDRequestAlert)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ds.alert.buildingIDRequest other) {
-      if (other == ds.alert.buildingIDRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(ds.alert.buildingIDRequestAlert other) {
+      if (other == ds.alert.buildingIDRequestAlert.getDefaultInstance()) return this;
       if (other.getBuildingID() != 0) {
         setBuildingID(other.getBuildingID());
       }
@@ -410,11 +410,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ds.alert.buildingIDRequest parsedMessage = null;
+      ds.alert.buildingIDRequestAlert parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ds.alert.buildingIDRequest) e.getUnfinishedMessage();
+        parsedMessage = (ds.alert.buildingIDRequestAlert) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -488,41 +488,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:alert.buildingIDRequest)
+    // @@protoc_insertion_point(builder_scope:alert.buildingIDRequestAlert)
   }
 
-  // @@protoc_insertion_point(class_scope:alert.buildingIDRequest)
-  private static final ds.alert.buildingIDRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:alert.buildingIDRequestAlert)
+  private static final ds.alert.buildingIDRequestAlert DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ds.alert.buildingIDRequest();
+    DEFAULT_INSTANCE = new ds.alert.buildingIDRequestAlert();
   }
 
-  public static ds.alert.buildingIDRequest getDefaultInstance() {
+  public static ds.alert.buildingIDRequestAlert getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<buildingIDRequest>
-      PARSER = new com.google.protobuf.AbstractParser<buildingIDRequest>() {
+  private static final com.google.protobuf.Parser<buildingIDRequestAlert>
+      PARSER = new com.google.protobuf.AbstractParser<buildingIDRequestAlert>() {
     @java.lang.Override
-    public buildingIDRequest parsePartialFrom(
+    public buildingIDRequestAlert parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new buildingIDRequest(input, extensionRegistry);
+      return new buildingIDRequestAlert(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<buildingIDRequest> parser() {
+  public static com.google.protobuf.Parser<buildingIDRequestAlert> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<buildingIDRequest> getParserForType() {
+  public com.google.protobuf.Parser<buildingIDRequestAlert> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public ds.alert.buildingIDRequest getDefaultInstanceForType() {
+  public ds.alert.buildingIDRequestAlert getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

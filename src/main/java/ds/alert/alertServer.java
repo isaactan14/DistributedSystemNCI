@@ -97,25 +97,37 @@ public class alertServer extends alertServiceImplBase {
 
 
 @Override
-public void monitoringThreshold(buildingIDRequest request, StreamObserver<monitoringResponse> responseObserver) {
+public void monitoringThreshold(buildingIDRequestAlert request, StreamObserver<monitoringResponse> responseObserver) {
 	try {
-	System.out.println("receiving Monitoring Threshold");
+	System.out.println("Receiving building ID");
 	
-	String result;
 	
-	if (request.getEnergyReading()<100) {
-		result= "Does not exceed threshold";
-	} else {
-		result="Threshold exceeded";
-	}
-	
-	monitoringResponse reply = monitoringResponse.newBuilder().setExceedMessage(result).build();
-	responseObserver.onNext(reply);
-	responseObserver.onCompleted();
+	int id = request.getBuildingID();
+	switch (id) {
+	case 001: sendMessage("Exceed",responseObserver); break;
+	case 002: sendMessage("Not exceeded",responseObserver); break;
+	case 003: sendMessage("Not exceeded",responseObserver); break;
+	case 004: sendMessage("Exceed",responseObserver); break;
+	case 005: sendMessage("Not exceeded",responseObserver); break;
+	 default:
+         sendMessage("Unknown building ID", responseObserver);
+		}
 	} catch (Exception ex) {
         String errorMessage = "Error processing monitoringThreshold request: " + ex.getMessage();
         responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
 	}
+	responseObserver.onCompleted();
+}
+
+private void sendMessage(String message, StreamObserver<monitoringResponse> responseObserver) {
+    try {
+        monitoringResponse reply = monitoringResponse.newBuilder().setExceedMessage(message).build();
+        responseObserver.onNext(reply);
+        responseObserver.onCompleted();
+    } catch (Exception ex) {
+        String errorMessage = "Error sending monitoringResponse: " + ex.getMessage();
+        responseObserver.onError(Status.INTERNAL.withDescription(errorMessage).asRuntimeException());
+    }
 }
 	
 
@@ -134,7 +146,7 @@ public StreamObserver<sendAlertRequest> sendAlert(StreamObserver<sendAlertRespon
 			
 			try {
 				
-			if (request.getEnergyReading()>=100) {
+			if (request.getBuildingID()>0 && request.getTemperatureReading()>18 && request.getEnergyReading()>=100) {
 				result= "Send alert message";}
 			} catch (Exception ex) {
                 String errorMessage = "Error processing sendAlert request: " + ex.getMessage();

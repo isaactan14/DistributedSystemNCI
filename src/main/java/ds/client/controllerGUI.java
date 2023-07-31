@@ -159,11 +159,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import io.grpc.stub.StreamObserver;
-
+import ds.alert.thresholdRequest;
+import ds.alert.*;
+import ds.alert.alertServiceGrpc.alertServiceBlockingStub;
 import ds.control.buildingIDRequest;
 import ds.control.controlScheduleGrpc;
 import ds.control.controlScheduleGrpc.controlScheduleBlockingStub;
@@ -197,6 +200,9 @@ public class controllerGUI implements ActionListener{
     private static energyReadingBlockingStub energyBlockingStub;
     // Asynch stub
     private static energyReadingGrpc.energyReadingStub energyAsyncStub;
+    private static alertServiceBlockingStub alertBlockingStub;
+    // Asynch stub
+    private static alertServiceGrpc.alertServiceStub alertAsyncStub;
 
     private static JFrame frame;
     private static JLabel heatingLabel;
@@ -205,14 +211,21 @@ public class controllerGUI implements ActionListener{
     private static JLabel energyLabel;
     private static JLabel waterLabel;
     private static JLabel temperatureLabel;
+    private static JLabel energyThresholdLabel;
+    private static JLabel monitoringThresholdLabel;
+    private static JLabel sendAlertLabel1,sendAlertLabel2,sendAlertLabel3;
     private static JButton heatingButton;
     private static JButton lightingButton;
     private static JButton scheduleButton;
     private static JButton energyButton;
     private static JButton waterButton;
     private static JButton temperatureButton;
-    private static JTextField heatingInput, lightingInput, scheduleInput, buildingIDInput1, buildingIDInput2, buildingIDInput3 ;
-
+    private static JButton energyThresholdButton;
+    private static JButton monitoringThresholdButton;
+    private static JButton sendAlertButton1, sendAlertButton2, sendAlertButton3;
+    private static JTextField heatingInput, lightingInput, scheduleInput, buildingIDInput1, buildingIDInput2, buildingIDInput3, buildingIDInput4, energyThresholdInput ;
+    private static JTextField buildingIDInput5, energyInput, temperatureInput;
+    
     public static void main(String[] args) throws Exception {
         // Establish connection with the server
 		String host = "localhost";
@@ -228,6 +241,8 @@ public class controllerGUI implements ActionListener{
 		controlAsyncStub = controlScheduleGrpc.newStub(channel);
 		energyBlockingStub = energyReadingGrpc.newBlockingStub(channel);
 		energyAsyncStub = energyReadingGrpc.newStub(channel);
+		alertBlockingStub = alertServiceGrpc.newBlockingStub(channel);
+		alertAsyncStub = alertServiceGrpc.newStub(channel);
 		
 		//initialize the Swing GUI
         SwingUtilities.invokeLater(() -> {
@@ -248,7 +263,7 @@ public class controllerGUI implements ActionListener{
         // Create the main frame
     	frame = new JFrame("Controller GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(7, 3, 10, 10));
+        frame.setLayout(new GridLayout(12, 3, 10, 10));
         frame.setSize(1000, 500);
 
         // Create labels and buttons
@@ -258,18 +273,33 @@ public class controllerGUI implements ActionListener{
         energyLabel = new JLabel("Enter building ID. Energy Reading: ");
         waterLabel = new JLabel("Enter building ID. Water Reading: ");
         temperatureLabel = new JLabel("Enter building ID. Temperature Reading: ");
+        energyThresholdLabel = new JLabel("Enter Energy Threshold Limit. Energy Limit: ");
+        monitoringThresholdLabel = new JLabel("Enter building ID. Threshold Exceed Message: ");
+        sendAlertLabel1 = new JLabel("Enter Building ID: ");
+        sendAlertLabel2 = new JLabel("Enter Temperature in Celcius: ");
+        sendAlertLabel3 = new JLabel("Enter Energy in kWh: ");
         heatingInput = new JTextField();
         lightingInput = new JTextField();
         scheduleInput = new JTextField();
         buildingIDInput1 = new JTextField();
         buildingIDInput2 = new JTextField();
         buildingIDInput3 = new JTextField();
+        buildingIDInput4 = new JTextField();
+        buildingIDInput5 = new JTextField();
+        energyThresholdInput = new JTextField();
+        temperatureInput = new JTextField();
+        energyInput = new JTextField();
         heatingButton = new JButton("Get Heating Action");
         lightingButton = new JButton("Get Lighting Action");
         scheduleButton = new JButton("View Schedule");
         energyButton = new JButton("Get Energy Reading");
         waterButton = new JButton("Get Water Reading");
         temperatureButton = new JButton("Get Temperature Reading");
+        energyThresholdButton = new JButton("Set Energy Threshold Limit");
+        monitoringThresholdButton = new JButton("Threshold Limit Exceed/Not Exceed");
+        sendAlertButton1 = new JButton("Send Alert to Authorities during Anomaly");
+        sendAlertButton2 = new JButton("Send Alert to Authorities during Anomaly");
+        sendAlertButton3 = new JButton("Send Alert to Authorities during Anomaly");
 
         // Add action listeners to the buttons
         heatingButton.addActionListener(new ActionListener() {
@@ -314,6 +344,41 @@ public class controllerGUI implements ActionListener{
                 getTemperatureReading();
             }
         });
+        
+        energyThresholdButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setEnergyThreshold();
+            }
+        });
+        
+        monitoringThresholdButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                monitoringThreshold();
+            }
+        });
+        
+        sendAlertButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendAlert();
+            }
+        });
+        
+        sendAlertButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendAlert();
+            }
+        });
+        
+        sendAlertButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendAlert();
+            }
+        });
 
         // Add components to the frame
         frame.add(heatingLabel);
@@ -334,6 +399,21 @@ public class controllerGUI implements ActionListener{
         frame.add(temperatureLabel);
         frame.add(buildingIDInput3);
         frame.add(temperatureButton);
+        frame.add(energyThresholdLabel);
+        frame.add(energyThresholdInput);
+        frame.add(energyThresholdButton);
+        frame.add(monitoringThresholdLabel);
+        frame.add(buildingIDInput4);
+        frame.add(monitoringThresholdButton);
+        frame.add(sendAlertLabel1);
+        frame.add(buildingIDInput5);
+        frame.add(sendAlertButton1);
+        frame.add(sendAlertLabel2);
+        frame.add(temperatureInput);
+        frame.add(sendAlertButton2);
+        frame.add(sendAlertLabel3);
+        frame.add(energyInput);
+        frame.add(sendAlertButton3);
 
         // Show the GUI
         frame.setVisible(true);
@@ -367,10 +447,11 @@ public class controllerGUI implements ActionListener{
 
             StreamObserver<energyDemandRequest> requestObserver = controlAsyncStub.getHeating(responseObserver);
             requestObserver.onNext(req);
-            requestObserver.onCompleted();
+            //requestObserver.onCompleted();
         } catch (StatusRuntimeException ex) {
             heatingLabel.setText("Error getting Heating Action: " + ex.getMessage());
         }
+
     }
     
     private static void getLightingAction() {
@@ -379,6 +460,7 @@ public class controllerGUI implements ActionListener{
         
     	energyDemandRequest req = energyDemandRequest.newBuilder().setEnergyDemand(lightingAction).build();
        
+    	
         try {
             lightingLabel.setText("Lighting Action: ");
             StreamObserver<lightingResponse> responseObserver = new StreamObserver<lightingResponse>() {
@@ -515,6 +597,113 @@ public class controllerGUI implements ActionListener{
        }
    }
    
+   private static void setEnergyThreshold() {
+   	String sEnergyLimit = energyThresholdInput.getText();
+   	int energyLimit = Integer.parseInt(sEnergyLimit);
+   	
+       thresholdRequest req = thresholdRequest.newBuilder().setEnergyLimit(energyLimit).build();
+       try {
+           thresholdResponse response = alertBlockingStub.setThreshold(req);
+           String statusMessage = response.getSetStatusMessage();
+           int date = response.getDate();
+           System.out.println("Status Message: " + statusMessage);
+           System.out.println("Date: " + date);
+       } catch (StatusRuntimeException ex) {
+    	   System.out.println("Error setting energy threshold: " + ex.getMessage());
+       }
+   }
+   
+   private static void monitoringThreshold() {
+       String sbuildingID = buildingIDInput4.getText();
+       int  buildingID= Integer.parseInt(sbuildingID);
+       
+   	buildingIDRequestAlert req = buildingIDRequestAlert.newBuilder().setBuildingID(buildingID).build();
+      
+       try {
+           monitoringThresholdLabel.setText("The threshold limit: ");
+           StreamObserver<monitoringResponse> responseObserver = new StreamObserver<monitoringResponse>() {
+               @Override
+               public void onNext(monitoringResponse response) {
+                   monitoringThresholdLabel.setText("The threshold limit: " + response.getExceedMessage());
+               }
+
+               @Override
+               public void onError(Throwable t) {
+            	   monitoringThresholdLabel.setText("Error getting threshold limit message " + t.getMessage());
+               }
+
+               @Override
+               public void onCompleted() {
+                   System.out.println("Monitoring threshold request completed.");
+               }
+           };
+
+           alertAsyncStub.monitoringThreshold(req, responseObserver);
+
+       } catch (StatusRuntimeException ex) {
+    	   monitoringThresholdLabel.setText("Error getting threshold limit message " + ex.getMessage());
+       }
+   }
+   
+	public static void sendAlert() {
+
+		// Handling the stream for client using onNext (logic for handling each message in stream), onError, onCompleted (logic will be executed after the completion of stream)
+		StreamObserver<sendAlertResponse> responseObserver = new StreamObserver<sendAlertResponse>() {
+
+			@Override
+			public void onNext(sendAlertResponse alertMessage) {
+				System.out.println("Sending alert message " + alertMessage);
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				System.err.println("Error sending alert: " + t.getMessage());
+				sendAlertLabel1.setText("Error sending alert: " + t.getMessage());
+	            sendAlertLabel2.setText("Error sending alert: " + t.getMessage());
+	            sendAlertLabel3.setText("Error sending alert: " + t.getMessage());
+
+			}
+
+			@Override
+			public void onCompleted() {
+				System.out.println("Alert sending completed ");
+	            sendAlertLabel1.setText("Alert sending completed");
+	            sendAlertLabel2.setText("Alert sending completed");
+	            sendAlertLabel3.setText("Alert sending completed");
+
+			}
+
+		};
+
+		// Here, we are calling the Remote sendAlert method. Using onNext, client sends a stream of messages.
+		StreamObserver<sendAlertRequest> requestObserver = alertAsyncStub.sendAlert(responseObserver);
+	       String sbuildingID = buildingIDInput5.getText();
+	       int  buildingID= Integer.parseInt(sbuildingID);
+	       String sTemperatureInput = temperatureInput.getText();
+	       int  temperatureInput= Integer.parseInt(sTemperatureInput);
+	       String sEnergyInput = energyInput.getText();
+	       int  energyInput = Integer.parseInt(sEnergyInput);
+	       
+		try {
+
+			requestObserver.onNext(sendAlertRequest.newBuilder().setBuildingID(buildingID).build());
+			requestObserver.onNext(sendAlertRequest.newBuilder().setTemperatureReading(temperatureInput).build());
+			requestObserver.onNext(sendAlertRequest.newBuilder().setEnergyReading(energyInput).build());
+
+			System.out.println("SENDING MESSAGES");
+
+			// Mark the end of requests
+			requestObserver.onCompleted();
+
+
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			 sendAlertLabel1.setText("Error sending alert: " + e.getMessage());
+		     sendAlertLabel2.setText("Error sending alert: " + e.getMessage());
+		     sendAlertLabel3.setText("Error sending alert: " + e.getMessage());
+		}
+	}
+   
 @Override
 public void actionPerformed(ActionEvent e) {
     // Handle button clicks here
@@ -530,6 +719,16 @@ public void actionPerformed(ActionEvent e) {
         getWaterReading();
     } else if (e.getSource() == temperatureButton) {
         getTemperatureReading();
+    } else if (e.getSource() == energyThresholdButton) {
+        setEnergyThreshold();
+    } else if (e.getSource() == monitoringThresholdButton) {
+        monitoringThreshold();
+    } else if (e.getSource() == sendAlertButton1) {
+        sendAlert();
+    } else if (e.getSource() == sendAlertButton2) {
+        sendAlert();
+    } else if (e.getSource() == sendAlertButton3) {
+        sendAlert();
     }
 	}
 }

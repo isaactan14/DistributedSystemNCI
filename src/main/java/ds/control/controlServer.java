@@ -6,6 +6,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 //required java packages for the program. 
 import java.io.IOException;
+import java.lang.System.Logger.Level;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
@@ -44,6 +45,13 @@ public class controlServer extends controlScheduleImplBase {
 		        .addService(controlserver) // Service is defined in line 36
 		        .build() // Build the server
 		        .start(); // Start the server and keep it running for clients to contact.
+		    
+		    System.Logger.Level level = System.Logger.Level.INFO; 
+
+		 // Giving a logging information on the server console that server has started
+		 System.getLogger("controlServer").log(level, "Server started, listening on port " + port);
+
+	        logger.info("Server started, listening on " + port);
 		    		    
 		    // Server will be running until externally terminated.
 		    server.awaitTermination();
@@ -56,8 +64,6 @@ public class controlServer extends controlScheduleImplBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		    // Giving a logging information on the server console that server has started
-		    logger.info("Server started, listening on " + port);
 		    
 	 }
 
