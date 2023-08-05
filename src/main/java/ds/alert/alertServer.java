@@ -4,10 +4,18 @@ package ds.alert;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
+import java.io.FileInputStream;
 //required java packages for the program. 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.logging.Logger;
+
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
+
 
 //required grpc package for the server side
 import io.grpc.Server;
@@ -31,7 +39,7 @@ public class alertServer extends alertServiceImplBase {
 
 	// Main method would contain the logic to start the server.	For throws keyword refer https://www.javatpoint.com/throw-keyword
 			// NOTE: THIS LOGIC WILL BE SAME FOR ALL THE TYPES OF SERVICES
-	 public static void main(String[] args) throws IOException, InterruptedException {
+	/** public static void main(String[] args) throws IOException, InterruptedException {
 		    
 		// The controlServer is the current file name/ class name. Using an instance of this class different methods could be invoked by the client.
 		 	alertServer alertserver = new alertServer();
@@ -62,7 +70,7 @@ public class alertServer extends alertServiceImplBase {
 			}
 		    
 		    
-	 }
+	 } **/
 
 		// These RPC methods have been defined in the proto files. The interface is already present in the ImplBase File.
 //		NOTE - YOU MAY NEED TO MODIFY THIS LOGIC FOR YOUR PROJECTS BASED ON TYPE OF THE RPC METHODS 
@@ -174,5 +182,98 @@ public StreamObserver<sendAlertRequest> sendAlert(StreamObserver<sendAlertRespon
 			}
 		};
 	}
+
+/**
+ * Get alert service properties.
+ * 
+ * @return Properties
+ */
+private Properties getProperties() {
+	Properties properties = null;
+
+	// Try get the properties.
+	try (InputStream input = new FileInputStream("src/main/resources/alert.properties")) {
+		// Load the service properties file.
+		properties = new Properties();
+		properties.load(input);
+
+		// Print service properties values.
+		System.out.println("Alert service properties:");
+		System.out.println("- service_type: " + properties.getProperty("service_type"));
+		System.out.println("- service_name: " + properties.getProperty("service_name"));
+		System.out.println("- service_description: " + properties.getProperty("service_description"));
+		System.out.println("- service_port: " + properties.getProperty("service_port"));
+	}
+	// If any errors.
+	catch (IOException e) {
+		// Print error message.
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+
+	return properties;
+}
+
+
+//Register JmDNS service
+private void registerService(Properties properties) {
+	// Try to register the jmDNS service.
+	try {
+		// Create a JmDNS instance.
+		JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+
+		// Get service properties.
+		String service_type = properties.getProperty("service_type");
+		String service_name = properties.getProperty("service_name");
+		int service_port = Integer.valueOf(properties.getProperty("service_port"));
+		String service_description = properties.getProperty("service_description");
+
+		// Register the service.
+		ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port, service_description);
+		jmdns.registerService(serviceInfo);
+
+		// Print message.
+		System.out.println("Registering service with type '" + service_type + "' and name '" + service_name + "'...");
+
+		// Wait a bit before continuing.
+		Thread.sleep(500);
+	}
+	// If any errors.
+	catch (IOException e) {
+		// Print error message.
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	} catch (InterruptedException e) {
+		// Print error message.
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+
+}
+
+public static void main(String[] args) throws IOException, InterruptedException {
+	// Set the alert service server.
+	alertServer alertServer = new alertServer();
+
+	// Get the service properties.
+	Properties properties = alertServer.getProperties();
+	// Register the jmDNS service.
+	alertServer.registerService(properties);
+
+	// Set the port to be used by the service.
+	int port = Integer.valueOf(properties.getProperty("service_port"));
+	
+	// Build the server.
+	Server server = ServerBuilder.forPort(port).addService(alertServer).build().start();
+
+	// Print server info
+	System.out.println("Alert server started, listening on port: " + port);
+	System.out.println("--------------------");
+
+	// Await server termination.
+	server.awaitTermination();
+}
+
+
 
 }
