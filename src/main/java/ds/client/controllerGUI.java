@@ -155,10 +155,20 @@ public class controllerGUI {
 
 package ds.client;
 
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceEvent;
+import javax.jmdns.ServiceInfo;
+import javax.jmdns.ServiceListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -226,23 +236,142 @@ public class controllerGUI implements ActionListener{
     private static JTextField heatingInput, lightingInput, scheduleInput, buildingIDInput1, buildingIDInput2, buildingIDInput3, buildingIDInput4, energyThresholdInput ;
     private static JTextField buildingIDInput5, energyInput, temperatureInput;
     
+    
+    //Service Variables
+    private ServiceInfo alertServiceInfo, controlServiceInfo, livemonitorServiceInfo;
+    
+	/**
+	 * Get service_type from the service properties.
+	 * 
+	 * @param fileName Service file name.
+	 * @return String
+	 */
+	private String getServiceType(String fileName) {
+		String serviceType = null;
+
+		// Try get the service type.
+		try (InputStream input = new FileInputStream("src/main/resources/" + fileName + ".properties")) {
+			// Load the service properties file.
+			Properties properties = new Properties();
+			properties.load(input);
+
+			// Get the service type.
+			serviceType = properties.getProperty("service_type");
+		}
+		// If any errors.
+		catch (IOException e) {
+			// Print error message.
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+
+		return serviceType;
+	}
+	
+	/**
+	 * Discover jmDNS service.
+	 * 
+	 */
+	private void discoverService(String serviceType, String serviceName, String serviceInfoName) {
+		// Try to discover the jmDNS service.
+		try {
+			// Create a JmDNS instance.
+			JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+			
+			// Add listener to the service.
+			jmdns.addServiceListener(serviceType, new ServiceListener() {
+				@Override
+				public void serviceResolved(ServiceEvent event) {
+					// Print message.
+					System.out.println(serviceName + " resolved: " + event.getInfo());
+
+					// Get the service info.
+					ServiceInfo serviceInfo = event.getInfo();
+					
+					// Stores the service info into the right variable.
+					if (serviceInfoName == "alertServiceInfo") {
+						alertServiceInfo = serviceInfo;
+					} else if (serviceInfoName == "controlServiceInfo") {
+						controlServiceInfo = serviceInfo;
+					} else if (serviceInfoName == "livemonitorServiceInfo") {
+						livemonitorServiceInfo = serviceInfo;
+					}
+					
+
+					// Print service properties values.
+					System.out.println("Resolving " + serviceType + " with properties:");
+					System.out.println("- type:" + event.getType());
+					System.out.println("- name: " + event.getName());
+					System.out.println("- description: " + serviceInfo.getNiceTextString());
+					System.out.println("- host: " + serviceInfo.getHostAddresses()[0]);
+					System.out.println("- port: " + serviceInfo.getPort());
+					System.out.println("--------------------");
+				}
+
+				@Override
+				public void serviceRemoved(ServiceEvent event) {
+					// Print message.
+					System.out.println(serviceName + " removed: " + event.getInfo());
+				}
+
+				@Override
+				public void serviceAdded(ServiceEvent event) {
+					// Print message.
+					System.out.println(serviceName + " added: " + event.getInfo());
+				}
+			});
+
+			// Wait a bit before continuing.
+			Thread.sleep(500);
+
+			// Close jmDNS.
+			jmdns.close();
+		} 
+		// If any errors.
+		catch (UnknownHostException e) {
+			// Print error message.
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			// Print error message.
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// Print error message.
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Discover all the jmDNS services.
+	 */
+	private void discoverServices() {
+		// Print message.
+		System.out.println("Discovering services...");
+		System.out.println("--------------------");
+		
+		// Discover alert Service.
+		discoverService(getServiceType("alert"), "Alert Service", "alertServiceInfo");
+		
+		// Discover service 2.
+		discoverService(getServiceType("control"), "Control Service", "controlServiceInfo");
+		
+		// Discover service 3.
+		discoverService(getServiceType("livemonitor"), "Live Monitor Service", "livemonitorServiceInfo");
+	}
+    
+    
+    
     public static void main(String[] args) throws Exception {
-        // Establish connection with the server
-		String host = "localhost";
+        // Establish connection with the server - this is hardcoded. See below for dynamic host and port solutions.
+		/**String host = "localhost";
 		int port = 50058;
 		
 		ManagedChannel channel = ManagedChannelBuilder.
 				forAddress(host, port)
 				.usePlaintext()
-				.build();
-		
-		//stubs -- generate from proto
-		controlBlockingStub = controlScheduleGrpc.newBlockingStub(channel);
-		controlAsyncStub = controlScheduleGrpc.newStub(channel);
-		energyBlockingStub = energyReadingGrpc.newBlockingStub(channel);
-		energyAsyncStub = energyReadingGrpc.newStub(channel);
-		alertBlockingStub = alertServiceGrpc.newBlockingStub(channel);
-		alertAsyncStub = alertServiceGrpc.newStub(channel);
+				.build();**/
 		
 		//initialize the Swing GUI
         SwingUtilities.invokeLater(() -> {
@@ -250,12 +379,45 @@ public class controllerGUI implements ActionListener{
         });
         
         //Establish connection
-        /**controllerGUI client = new controllerGUI();
-		getHeatingAction();
-		getLightingAction();
-		viewSchedule();**/
+        controllerGUI client = new controllerGUI();
+        
+        //Discover all services
+        client.discoverServices();
+        
+        if (client.alertServiceInfo == null || client.controlServiceInfo == null || client.livemonitorServiceInfo == null) {
+            System.err.println("Failed to discover all required services. Exiting...");
+            System.exit(1);
+        }
+        
+        // Get the discovered service host and port
+        String alertHost = client.alertServiceInfo.getHostAddresses()[0];
+        int alertPort = client.alertServiceInfo.getPort();
+
+        String controlHost = client.controlServiceInfo.getHostAddresses()[0];
+        int controlPort = client.controlServiceInfo.getPort();
+
+        String livemonitorHost = client.livemonitorServiceInfo.getHostAddresses()[0];
+        int livemonitorPort = client.livemonitorServiceInfo.getPort();
+        
+        ManagedChannel alertChannel = ManagedChannelBuilder.forAddress(alertHost, alertPort).usePlaintext().build();
+        ManagedChannel controlChannel = ManagedChannelBuilder.forAddress(controlHost, controlPort).usePlaintext().build();
+        ManagedChannel livemonitorChannel = ManagedChannelBuilder.forAddress(livemonitorHost, livemonitorPort).usePlaintext().build();
+        
+		//stubs -- generate from proto
+		controlBlockingStub = controlScheduleGrpc.newBlockingStub(controlChannel);
+		controlAsyncStub = controlScheduleGrpc.newStub(controlChannel);
+		energyBlockingStub = energyReadingGrpc.newBlockingStub(livemonitorChannel);
+		energyAsyncStub = energyReadingGrpc.newStub(livemonitorChannel);
+		alertBlockingStub = alertServiceGrpc.newBlockingStub(alertChannel);
+		alertAsyncStub = alertServiceGrpc.newStub(alertChannel);
+        
+     // Print message.
+     		System.out.println("Client GUI started.");
+     		System.out.println("--------------------");
 		
-		channel.shutdown();
+		controlChannel.shutdown();
+		livemonitorChannel.shutdown();
+		alertChannel.shutdown();
 	
     }
 

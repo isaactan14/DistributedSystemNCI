@@ -35,46 +35,7 @@ import ds.alert.alertServiceGrpc.alertServiceImplBase;
 public class alertServer extends alertServiceImplBase {
 
 	// First we create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
-	private static final Logger logger = Logger.getLogger(alertServer.class.getName());
-
-	// Main method would contain the logic to start the server.	For throws keyword refer https://www.javatpoint.com/throw-keyword
-			// NOTE: THIS LOGIC WILL BE SAME FOR ALL THE TYPES OF SERVICES
-	/** public static void main(String[] args) throws IOException, InterruptedException {
-		    
-		// The controlServer is the current file name/ class name. Using an instance of this class different methods could be invoked by the client.
-		 	alertServer alertserver = new alertServer();
-		   
-		 // This is the port number where server will be listening to clients. Refer - https://en.wikipedia.org/wiki/Port_(computer_networking)
-		    int port = 50058;
-		    
-		    try {
-		    // Here, we create a server on the port defined in in variable "port" and attach a service "controlServer" (instance of the class) defined above.
-		    Server server = ServerBuilder.forPort(port) // Port is defined in line 39
-		        .addService(alertserver) // Service is defined in line 36
-		        .build() // Build the server
-		        .start(); // Start the server and keep it running for clients to contact.
-		    
-		 // Giving a logging information on the server console that server has started
-		    logger.info("Server started, listening on " + port);
-		    
-		    // Server will be running until externally terminated.
-		    server.awaitTermination();
-		    
-		    } catch (IOException e) {
-				// TODO Auto-generated catch block
-		    	logger.severe("Error starting the server: " + e.getMessage());
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				logger.severe("Server interrupted: " + e.getMessage());
-			}
-		    
-		    
-	 } **/
-
-		// These RPC methods have been defined in the proto files. The interface is already present in the ImplBase File.
-//		NOTE - YOU MAY NEED TO MODIFY THIS LOGIC FOR YOUR PROJECTS BASED ON TYPE OF THE RPC METHODS 
-	// For override Refer - https://docs.oracle.com/javase/8/docs/api/java/lang/Override.html	 
+	private static final Logger logger = Logger.getLogger(alertServer.class.getName()); 
 
 
 
