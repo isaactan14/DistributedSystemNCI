@@ -199,8 +199,8 @@ public class controllerGUI implements ActionListener{
 
 	private static final Logger logger = Logger.getLogger(controllerGUI.class.getName());
 	
-    private static final int PORT = 50058;
-    private static final String HOST = "localhost";
+    //private static final int PORT = 50058;
+    //private static final String HOST = "localhost";
 
 	// Creating stubs for establishing the connection with server.
 	// Blocking stub
@@ -384,20 +384,31 @@ public class controllerGUI implements ActionListener{
         //Discover all services
         client.discoverServices();
         
-        if (client.alertServiceInfo == null || client.controlServiceInfo == null || client.livemonitorServiceInfo == null) {
+        /**if (client.alertServiceInfo == null || client.controlServiceInfo == null || client.livemonitorServiceInfo == null) {
             System.err.println("Failed to discover all required services. Exiting...");
             System.exit(1);
-        }
+        }**/
         
         // Get the discovered service host and port
-        String alertHost = client.alertServiceInfo.getHostAddresses()[0];
+        /**String alertHost = client.alertServiceInfo.getHostAddresses()[0];
         int alertPort = client.alertServiceInfo.getPort();
 
         String controlHost = client.controlServiceInfo.getHostAddresses()[0];
         int controlPort = client.controlServiceInfo.getPort();
 
         String livemonitorHost = client.livemonitorServiceInfo.getHostAddresses()[0];
-        int livemonitorPort = client.livemonitorServiceInfo.getPort();
+        int livemonitorPort = client.livemonitorServiceInfo.getPort();**/
+        
+        // Get the discovered service host and port
+        String alertHost = "localhost";
+        int alertPort = 50057;
+
+        String controlHost = "localhost";
+        int controlPort = 50058;
+
+        String livemonitorHost = "localhost";
+        int livemonitorPort = 50059;
+        
         
         ManagedChannel alertChannel = ManagedChannelBuilder.forAddress(alertHost, alertPort).usePlaintext().build();
         ManagedChannel controlChannel = ManagedChannelBuilder.forAddress(controlHost, controlPort).usePlaintext().build();

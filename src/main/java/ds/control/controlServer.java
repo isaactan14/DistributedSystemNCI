@@ -34,16 +34,15 @@ import ds.control.controlScheduleGrpc.controlScheduleImplBase;
 //Extend the ImplBase imported class here. It is an Interface file with required rpc methods
 public class controlServer extends controlScheduleImplBase {
 
-	// First we create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
+	// First create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
 	private static final Logger logger = Logger.getLogger(controlServer.class.getName());
  
 
-		
+//Bidirectional Streaming RPC		
 @Override
 	public StreamObserver<energyDemandRequest> getHeating(StreamObserver<heatingResponse> responseObserver) {
 		return new StreamObserver<energyDemandRequest>() {
 			// For each message in the stream, get one stream at a time.
-			// NOTE: YOU MAY MODIFY THE LOGIC OF onNext, onError, onCompleted BASED ON YOUR PROJECT.
 			@Override
 			public void onNext(energyDemandRequest request) {
 				// In bidirectional stream, both server and  client would be sending the stream of messages.
@@ -57,7 +56,7 @@ public class controlServer extends controlScheduleImplBase {
 					result= "Turn off Heating";
 				};
 		        
-		         // Preparing and sending the reply for the client. Here, response is build and with the value (input1.toString()) computed by above logic.
+		         // Preparing and sending the reply for the client. 
 		            heatingResponse reply = heatingResponse.newBuilder().setHeatingAction(result).build();
 		      
 		            responseObserver.onNext(reply);
@@ -79,12 +78,12 @@ public class controlServer extends controlScheduleImplBase {
 		};
 	}
 
+	//Bidirectional Streaming RPC	
 @Override
 	public StreamObserver<energyDemandRequest> getLighting(StreamObserver<lightingResponse> responseObserver) {
 		return new StreamObserver<energyDemandRequest>() {
 		
 			 // For each message in the stream, get one stream at a time.
-			// NOTE: YOU MAY MODIFY THE LOGIC OF onNext, onError, onCompleted BASED ON YOUR PROJECT.
 			@Override
 			public void onNext(energyDemandRequest request) {
 				// In bidirectional stream, both server and  client would be sending the stream of messages.
@@ -98,7 +97,7 @@ public class controlServer extends controlScheduleImplBase {
 					result= "Turn off Lighting";
 				};
 		        
-		         // Preparing and sending the reply for the client. Here, response is build and with the value (input1.toString()) computed by above logic.
+		         // Preparing and sending the reply for the client. 
 		            lightingResponse reply = lightingResponse.newBuilder().setLightingAction(result).build();
 		      
 		            responseObserver.onNext(reply);
@@ -119,6 +118,7 @@ public class controlServer extends controlScheduleImplBase {
 		};
 	}
 
+	//Bidirectional Streaming RPC	
 @Override
 	public void getSchedule(buildingIDRequest request,  StreamObserver<scheduleResponse> responseObserver) {
 	    

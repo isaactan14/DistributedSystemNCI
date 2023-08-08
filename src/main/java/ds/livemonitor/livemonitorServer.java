@@ -33,11 +33,11 @@ import ds.livemonitor.energyReadingGrpc.energyReadingImplBase;
 //Extend the ImplBase imported class here. It is an Interface file with required rpc methods
 public class livemonitorServer extends energyReadingImplBase{
 
-	// First we create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
+	// First create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
 	private static final Logger logger = Logger.getLogger(livemonitorServer.class.getName());
 
 
-
+//server streaming RPC
 @Override
 public void getEnergyReading(buildingIDRequestMonitor request, StreamObserver<energyReadingResponse> responseObserver) {
 	try {
@@ -70,6 +70,7 @@ responseObserver.onNext(reply);
 	}
 }
 
+//server streaming RPC
 @Override
 public void getWaterReading(buildingIDRequestMonitor request, StreamObserver<waterReadingResponse> responseObserver) {
 	try {
@@ -102,6 +103,7 @@ responseObserver.onNext(reply);
 	}
 }
 
+//server streaming RPC
 @Override
 public void getTemperatureReading(buildingIDRequestMonitor request, StreamObserver<temperatureReadingResponse> responseObserver) {
 	try {

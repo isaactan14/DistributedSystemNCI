@@ -34,11 +34,11 @@ import ds.alert.alertServiceGrpc.alertServiceImplBase;
 //Extend the ImplBase imported class here. It is an Interface file with required rpc methods
 public class alertServer extends alertServiceImplBase {
 
-	// First we create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
+	// First create a logger to show server side logs in the console. logger instance will be used to log different events at the server console.
 	private static final Logger logger = Logger.getLogger(alertServer.class.getName()); 
 
 
-
+//Unary RPC
 @Override
 	public void setThreshold(thresholdRequest request,  StreamObserver<thresholdResponse> responseObserver) {
 	    
@@ -64,7 +64,7 @@ public class alertServer extends alertServiceImplBase {
 	}
 }
 
-
+//Server Streaming RPC
 @Override
 public void monitoringThreshold(buildingIDRequestAlert request, StreamObserver<monitoringResponse> responseObserver) {
 	try {
@@ -99,7 +99,7 @@ private void sendMessage(String message, StreamObserver<monitoringResponse> resp
     }
 }
 	
-
+//Client Streaming RPC
 @Override
 public StreamObserver<sendAlertRequest> sendAlert(StreamObserver<sendAlertResponse> responseObserver) {
 	
